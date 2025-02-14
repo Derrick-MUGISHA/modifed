@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import TopNavigation from "../components/custom/Navigation/top-navigation";  // Correct the component import
+import TopNavigation from "../components/custom/Navigation/top-navigation";
+import Adds from "../components/custom/adds/adds";  // Correct the component import
+import Footer from "@/components/footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +33,8 @@ export default function RootLayout({
         {/* Corrected usage of the TopNavigation component */}
         <TopNavigation />
         {children}
-        <div>footer</div>
+        <Adds />
+        <Footer />
       </body>
     </html>
   );
