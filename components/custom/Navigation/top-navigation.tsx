@@ -132,7 +132,7 @@ const TopNavigation = () => {
               <a href="/partners" className="hover:text-gray-300">
                 Partners
               </a>
-              <a href="/blog" className="hover:text-gray-300">
+              <a href="/blog-nav" className="hover:text-gray-300">
                 Blog
               </a>
             </div>
