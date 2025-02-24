@@ -72,6 +72,8 @@ const ImageCarousel = () => {
             className={`h-3 w-3 rounded-full transition-all duration-300 ${
               index === currentIndex ? "bg-white scale-125" : "bg-gray-400"
             }`}
+            title={`View slide ${index + 1}`}
+            aria-label={`View slide ${index + 1}`}
           />
         ))}
       </div>
