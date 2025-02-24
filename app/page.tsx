@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { FaMapMarkerAlt } from "react-icons/fa";
