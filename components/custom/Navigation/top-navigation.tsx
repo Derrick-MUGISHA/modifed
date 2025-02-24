@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -33,9 +33,10 @@ import {
   Home,
   Hotel,
   Map,
+  LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Updated import to use next/navigation instead of next/router
+// import { useRouter } from "next/navigation"; // Updated import to use next/navigation instead of next/router
 
 // Map icons to categories
 const categoryIcons = {
@@ -48,7 +49,7 @@ const categoryIcons = {
 };
 
 // Format navigation item keys for display
-const formatNavLabel = (key) => {
+const formatNavLabel = (key: string): string => {
   // Handle special cases
   if (key === "thingsToDo") return "Things To Do";
   if (key === "exploreKigali") return "Explore Kigali";
@@ -133,13 +134,6 @@ const navItems = {
   ],
 };
 
-const secondaryLinks = [
-  { label: "Meeting Planners", href: "/meeting-planners" },
-  { label: "Tour & Reunion Planners", href: "/tour-planners" },
-  { label: "Partners", href: "/partners" },
-  { label: "Blog", href: "/blog-nav" },
-];
-
 const mainLinks = [
   { label: "Home", href: "/", icon: <Home size={16} /> },
   { label: "Discover", href: "/discover", icon: <Compass size={16} /> },
@@ -157,7 +151,7 @@ const socialIcons = [
 ];
 
 export default function Navigation() {
-  const router = useRouter();
+  // const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -193,7 +187,7 @@ export default function Navigation() {
 
   // Add progress bar animation
   useEffect(() => {
-    let interval;
+    let interval: NodeJS.Timeout;
     if (isNavigating && progress < 90) {
       interval = setInterval(() => {
         setProgress((prev) => Math.min(prev + 10, 90));
@@ -209,8 +203,8 @@ export default function Navigation() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [favorites, setFavorites] = useState(0);
-  const searchInputRef = useRef(null);
-  const searchContainerRef = useRef(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   // Client-side only code
   useEffect(() => {
@@ -226,13 +220,13 @@ export default function Navigation() {
 
   // Handle clicks outside search container to close it
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = (event: MouseEvent): void => {
       if (
-        searchContainerRef.current &&
-        !searchContainerRef.current.contains(event.target) &&
-        isSearching
+      searchContainerRef.current &&
+      !searchContainerRef.current.contains(event.target as Node) &&
+      isSearching
       ) {
-        setIsSearching(false);
+      setIsSearching(false);
       }
     };
 
@@ -306,13 +300,13 @@ export default function Navigation() {
       <div
         className={`w-full ${
           isScrolled ? "bg-black/90 backdrop-blur-md shadow-md" : "bg-gray-900"
-        } text-white fixed top-0 z-50 transition-all duration-300 pb-3`} // Added pb-2 to add padding at the bottom
+        } text-white fixed top-0 z-50 transition-all duration-300 pb-3`}
       >
         <div className="container mx-auto px-4">
           {/* Secondary Navigation, Social Icons, Search */}
-          <div className="flex justify-between items-center h-12 md:h-10 text-sm">
-            {/* Left side - Social Icons */}
-            <div className="hidden md:flex items-center space-x-3">
+          <div className="flex justify-between items-center h-14 md:h-12 text-sm">
+            {/* Left side - Social Icons (now shown on all screen sizes) */}
+            <div className="flex items-center space-x-4">
               {socialIcons.map(({ Icon, label }, index) => (
                 <a
                   key={index}
@@ -320,35 +314,22 @@ export default function Navigation() {
                   className="text-gray-300 hover:text-amber-400 transition-colors"
                   aria-label={`Follow us on ${label}`}
                 >
-                  <Icon size={14} />
+                  <Icon size={20} className="md:w-4 md:h-4" />
                 </a>
               ))}
             </div>
 
-            {/* Secondary Links */}
+            {/* Main Links - Moved to top navbar on desktop only */}
             <div className="hidden md:flex items-center space-x-4 text-xs font-bold">
-              {secondaryLinks.map((link, index) => (
+              {mainLinks.map((link, index) => (
                 <Link
                   key={index}
                   href={link.href}
-                  className="hover:text-amber-400 transition-colors whitespace-nowrap text-gray-300"
+                  className="hover:text-amber-400 transition-colors whitespace-nowrap text-gray-300 flex items-center gap-1"
                 >
-                  {link.label}
+                  <span className="text-amber-400">{link.icon}</span>
+                  <span>{link.label}</span>
                 </Link>
-              ))}
-            </div>
-
-            {/* Mobile Top Bar Icons */}
-            <div className="flex items-center space-x-3 md:hidden">
-              {socialIcons.slice(0, 3).map(({ Icon, label }, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-gray-300 hover:text-amber-400 transition-colors ml-6"
-                  aria-label={`Follow us on ${label}`}
-                >
-                  <Icon size={20} />
-                </a>
               ))}
             </div>
 
@@ -361,9 +342,9 @@ export default function Navigation() {
                 onClick={addToFavorites}
                 className="relative hover:text-amber-400 text-gray-200 h-8 px-2"
               >
-                <Heart size={16} />
+                <Heart size={20} className="md:w-4 md:h-4" />
                 {favorites > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-amber-500 text-black text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-amber-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     {favorites}
                   </span>
                 )}
@@ -382,48 +363,34 @@ export default function Navigation() {
           isScrolled
             ? "bg-black/95 backdrop-blur-md shadow-lg"
             : "bg-gradient-to-r from-gray-900 via-gray-800 to-black"
-        } text-white fixed top-12 md:top-10 z-40 transition-all duration-300 border-b border-gray-800 min-h-24`} // Changed h-6 to min-h-12
+        } text-white fixed top-14 md:top-12 z-40 transition-all duration-300 border-b border-gray-800 min-h-24 pb-4`}
       >
-        <div className="container mx-auto px-4 flex justify-between items-center h-20 md:h-20 relative">
-          {/* Logo */}
+        <div className="container mx-auto px-4 flex justify-between items-center h-24 md:h-24 relative">
+          {/* Logo - MADE BIGGER */}
           <Link href="/" className="flex-shrink-0 relative z-10">
             <img
               src="https://i.postimg.cc/RF3645kp/kigali-view-high-resolution-logo-removebg-preview.png"
               alt="Kigali View"
               className={`transition-all duration-300 ${
-                isScrolled ? "h-10 md:h-12" : "h-12 md:h-14"
+                isScrolled ? "h-16 md:h-20" : "h-20 md:h-24"
               }`}
             />
           </Link>
 
-          {/* Desktop Main Navigation */}
-          <div className="hidden lg:flex items-center justify-center space-x-1 xl:space-x-6">
-            {mainLinks.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                className="px-3 py-2 text-white hover:text-amber-400 font-medium transition-colors flex items-center space-x-1.5"
-              >
-                <span className="text-amber-400">{link.icon}</span>
-                <span>{link.label}</span>
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop Category Navigation */}
-          <div className="hidden lg:flex items-center flex-1 justify-center max-w-4xl">
-            <div className="flex items-center justify-center space-x-6">
+          {/* Desktop Category Navigation - Expanded space now that mainLinks are moved */}
+          <div className="hidden lg:flex items-center flex-1 justify-center max-w-5xl">
+            <div className="flex items-center justify-center space-x-8">
               {Object.keys(navItems).map((key) => (
                 <div key={key} className="relative group">
                   <button
-                    className="flex items-center space-x-1 text-white group-hover:text-amber-400 text-sm font-medium transition-colors duration-200"
+                    className="flex items-center space-x-1 text-white group-hover:text-amber-400 text-base font-medium transition-colors duration-200"
                     onMouseEnter={() => setOpenDropdown(key)}
                     onMouseLeave={() => setOpenDropdown(null)}
                     aria-expanded={openDropdown === key}
                   >
                     <span>{formatNavLabel(key)}</span>
                     <ChevronDown
-                      size={14}
+                      size={16}
                       className="transition-transform group-hover:rotate-180"
                     />
                   </button>
@@ -473,7 +440,7 @@ export default function Navigation() {
                 aria-label="Search"
                 className="hover:text-amber-400 text-gray-200"
               >
-                <Search size={20} />
+                <Search size={24} />
               </Button>
 
               {/* Search Dropdown */}
@@ -487,14 +454,14 @@ export default function Navigation() {
                         placeholder="Search Kigali View..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="flex-1 border-0 bg-gray-900 text-white focus-visible:ring-0 focus-visible:ring-offset-0 h-9"
+                        className="flex-1 border-0 bg-gray-900 text-white focus-visible:ring-0 focus-visible:ring-offset-0 h-10"
                       />
                       {searchQuery && (
                         <Button
                           type="button"
                           variant="ghost"
                           size="icon"
-                          className="h-9 w-9 text-gray-400 hover:text-white"
+                          className="h-10 w-10 text-gray-400 hover:text-white"
                           onClick={() => setSearchQuery("")}
                         >
                           <X size={16} />
@@ -503,7 +470,7 @@ export default function Navigation() {
                       <Button
                         type="submit"
                         variant="default"
-                        className="h-9 rounded-none bg-amber-500 hover:bg-amber-600 text-black"
+                        className="h-10 rounded-none bg-amber-500 hover:bg-amber-600 text-black"
                       >
                         <Search size={16} />
                       </Button>
@@ -567,7 +534,7 @@ export default function Navigation() {
                   className="lg:hidden text-white"
                   aria-label="Open Menu"
                 >
-                  <Menu size={28} />
+                  <Menu size={32} />
                 </Button>
               </SheetTrigger>
 
@@ -581,23 +548,23 @@ export default function Navigation() {
                     <img
                       src="https://i.postimg.cc/RF3645kp/kigali-view-high-resolution-logo-removebg-preview.png"
                       alt="Kigali View"
-                      className="h-12"
+                      className="h-20" // MADE BIGGER IN MOBILE MENU
                     />
                     <SheetClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
                       {/* <X className="h-5 w-5 text-white" /> */}
                       <span className="sr-only">Close</span>
                     </SheetClose>
                   </div>
-                  <SheetTitle className="text-amber-400 mt-2">
+                  <SheetTitle className="text-amber-400 mt-2 text-xl">
                     Discover Kigali
                   </SheetTitle>
-                  <SheetDescription className="text-gray-400">
+                  <SheetDescription className="text-gray-400 text-base">
                     Experience the beauty of Rwanda's capital city
                   </SheetDescription>
                 </SheetHeader>
 
                 <div className="overflow-y-auto max-h-[calc(100vh-150px)] p-4">
-                  {/* Main Navigation Links */}
+                  {/* Main Navigation Links for Mobile */}
                   <div className="space-y-1 mb-6">
                     <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
                       Main Navigation
@@ -606,10 +573,12 @@ export default function Navigation() {
                       <Link
                         key={index}
                         href={link.href}
-                        className="flex items-center space-x-3 text-white hover:text-amber-400 py-2 px-2 rounded-md hover:bg-gray-800/50 transition-colors"
+                        className="flex items-center space-x-3 text-white hover:text-amber-400 py-2 px-2 rounded-md hover:bg-gray-800/50 transition-colors text-lg"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <span className="text-amber-400">{link.icon}</span>
+                        <span className="text-amber-400">
+                          {React.cloneElement(link.icon, { size: 20 })}
+                        </span>
                         <span className="font-medium">{link.label}</span>
                       </Link>
                     ))}
@@ -627,17 +596,19 @@ export default function Navigation() {
                       >
                         <button
                           onClick={() => handleDropdownToggle(key)}
-                          className="flex items-center justify-between w-full text-md font-medium text-white py-2 hover:text-amber-400 transition-colors"
+                          className="flex items-center justify-between w-full text-lg font-medium text-white py-2 hover:text-amber-400 transition-colors"
                           aria-expanded={openDropdown === key}
                         >
                           <div className="flex items-center space-x-2">
                             <span className="text-amber-400">
-                              {categoryIcons[key] || <Globe size={18} />}
+                              {React.cloneElement(categoryIcons[key] || <Globe size={18} />, 
+                                { size: 20 }
+                              )}
                             </span>
                             <span>{formatNavLabel(key)}</span>
                           </div>
                           <ChevronDown
-                            size={18}
+                            size={20}
                             className={`transition-transform duration-300 ${
                               openDropdown === key
                                 ? "rotate-180 text-amber-400"
@@ -659,7 +630,7 @@ export default function Navigation() {
                               <Link
                                 key={index}
                                 href={item.link}
-                                className="flex items-center space-x-2 text-gray-300 hover:text-amber-400 py-1.5 rounded transition-colors text-sm"
+                                className="flex items-center space-x-2 text-gray-300 hover:text-amber-400 py-1.5 rounded transition-colors text-base"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
                                 <span>{item.label}</span>
@@ -670,28 +641,11 @@ export default function Navigation() {
                       </div>
                     ))}
                   </div>
-
-                  {/* Secondary Links */}
-                  <div className="mt-4 space-y-3 pb-4 border-t border-gray-800 pt-4">
-                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
-                      Additional Resources
-                    </h3>
-                    {secondaryLinks.map((link, index) => (
-                      <Link
-                        key={index}
-                        href={link.href}
-                        className="flex items-center space-x-2 text-gray-300 hover:text-amber-400 py-1 text-sm"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <span>{link.label}</span>
-                      </Link>
-                    ))}
-                  </div>
                 </div>
 
                 <SheetFooter className="p-4 border-t border-gray-800">
                   {/* Mobile Social Icons */}
-                  <div className="flex justify-center space-x-4 mb-4">
+                  <div className="flex justify-center space-x-6 mb-4">
                     {socialIcons.map(({ Icon, label }, index) => (
                       <a
                         key={index}
@@ -699,7 +653,7 @@ export default function Navigation() {
                         className="text-white hover:text-amber-400 transition-colors"
                         aria-label={`Follow us on ${label}`}
                       >
-                        <Icon size={18} />
+                        <Icon size={24} />
                       </a>
                     ))}
                   </div>
@@ -707,20 +661,20 @@ export default function Navigation() {
                   {/* Favorites Button */}
                   <Button
                     variant="outline"
-                    className="w-full border-gray-700 text-amber-400 hover:text-amber-300 hover:border-amber-600"
+                    className="w-full border-gray-700 text-amber-400 hover:text-amber-300 hover:border-amber-600 text-lg py-6"
                     onClick={addToFavorites}
                   >
-                    <Heart size={16} className="mr-2" />
+                    <Heart size={20} className="mr-2" />
                     <span>Save to Favorites</span>
                     {favorites > 0 && (
-                      <span className="ml-2 bg-amber-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                      <span className="ml-2 bg-amber-500 text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
                         {favorites}
                       </span>
                     )}
                   </Button>
 
                   {/* Copyright */}
-                  <div className="mt-4 text-center text-xs text-gray-400">
+                  <div className="mt-4 text-center text-sm text-gray-400">
                     <p>© 2025 Kigali View</p>
                     <p className="mt-1">Experience the beauty of Rwanda</p>
                   </div>
@@ -732,7 +686,7 @@ export default function Navigation() {
       </nav>
 
       {/* Spacer to push content below fixed navigation */}
-      <div className="h-28 md:h-32"></div>
+      <div className="h-40 md:h-40"></div>
     </>
   );
 }
