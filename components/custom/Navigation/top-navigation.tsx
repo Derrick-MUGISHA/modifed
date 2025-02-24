@@ -52,9 +52,9 @@ const formatNavLabel = (key) => {
   // Handle special cases
   if (key === "thingsToDo") return "Things To Do";
   if (key === "exploreKigali") return "Explore Kigali";
-  
+
   // General formatting: capitalize first letter of each word
-  return key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1');
+  return key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1");
 };
 
 const navItems = {
@@ -118,7 +118,10 @@ const navItems = {
   ],
   exploreKigali: [
     { label: "The Rwanda Art Museum", link: "/city-guide" },
-    { label: "The Kandt House Museum of Natural History", link: "/transportation" },
+    {
+      label: "The Kandt House Museum of Natural History",
+      link: "/transportation",
+    },
     { label: "Waka Waka Café", link: "/culture" },
     { label: "Sabyinyo Silverback Lodge", link: "/history" },
     { label: "Norr Hotel", link: "/history" },
@@ -160,7 +163,7 @@ export default function Navigation() {
 
   // Modified navigation progress handling for Next.js 13+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const handleStart = () => {
         setIsNavigating(true);
         setProgress(10);
@@ -175,12 +178,15 @@ export default function Navigation() {
       };
 
       // Use the newer navigation events API or a custom approach
-      document.addEventListener('nextjs:route-change-start', handleStart);
-      document.addEventListener('nextjs:route-change-complete', handleComplete);
-      
+      document.addEventListener("nextjs:route-change-start", handleStart);
+      document.addEventListener("nextjs:route-change-complete", handleComplete);
+
       return () => {
-        document.removeEventListener('nextjs:route-change-start', handleStart);
-        document.removeEventListener('nextjs:route-change-complete', handleComplete);
+        document.removeEventListener("nextjs:route-change-start", handleStart);
+        document.removeEventListener(
+          "nextjs:route-change-complete",
+          handleComplete
+        );
       };
     }
   }, []);
@@ -212,7 +218,7 @@ export default function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    
+
     // Add event listener only on client side
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -222,18 +228,19 @@ export default function Navigation() {
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
-        searchContainerRef.current && 
+        searchContainerRef.current &&
         !searchContainerRef.current.contains(event.target) &&
         isSearching
       ) {
         setIsSearching(false);
       }
     };
-    
+
     // Add event listener only on client side
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       document.addEventListener("mousedown", handleOutsideClick);
-      return () => document.removeEventListener("mousedown", handleOutsideClick);
+      return () =>
+        document.removeEventListener("mousedown", handleOutsideClick);
     }
   }, [isSearching]);
 
@@ -253,21 +260,21 @@ export default function Navigation() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    
+
     // Flatten all nav items to search through them
-    const allItems = Object.entries(navItems).flatMap(([category, items]) => 
-      items.map(item => ({
+    const allItems = Object.entries(navItems).flatMap(([category, items]) =>
+      items.map((item) => ({
         ...item,
         category,
-        formattedCategory: formatNavLabel(category)
+        formattedCategory: formatNavLabel(category),
       }))
     );
-    
+
     // Filter items based on search query
-    const results = allItems.filter(item => 
+    const results = allItems.filter((item) =>
       item.label.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    
+
     setSearchResults(results);
   };
 
@@ -280,7 +287,7 @@ export default function Navigation() {
 
   // Add to favorites
   const addToFavorites = () => {
-    setFavorites(prev => prev + 1);
+    setFavorites((prev) => prev + 1);
   };
 
   // Use this check to prevent hydration errors
@@ -296,19 +303,17 @@ export default function Navigation() {
   return (
     <>
       {/* Top Navigation Bar */}
-      <div 
+      <div
         className={`w-full ${
-          isScrolled 
-            ? "bg-black/90 backdrop-blur-md shadow-md" 
-            : "bg-gray-900"
-        } text-white fixed top-0 z-50 transition-all duration-300`}
+          isScrolled ? "bg-black/90 backdrop-blur-md shadow-md" : "bg-gray-900"
+        } text-white fixed top-0 z-50 transition-all duration-300 pb-3`} // Added pb-2 to add padding at the bottom
       >
         <div className="container mx-auto px-4">
           {/* Secondary Navigation, Social Icons, Search */}
           <div className="flex justify-between items-center h-12 md:h-10 text-sm">
             {/* Left side - Social Icons */}
             <div className="hidden md:flex items-center space-x-3">
-              {socialIcons.map(({Icon, label}, index) => (
+              {socialIcons.map(({ Icon, label }, index) => (
                 <a
                   key={index}
                   href="#"
@@ -319,38 +324,38 @@ export default function Navigation() {
                 </a>
               ))}
             </div>
-            
+
             {/* Secondary Links */}
-            <div className="hidden md:flex items-center space-x-4 text-xs font-medium">
+            <div className="hidden md:flex items-center space-x-4 text-xs font-bold">
               {secondaryLinks.map((link, index) => (
-                <Link 
-                  key={index} 
-                  href={link.href} 
+                <Link
+                  key={index}
+                  href={link.href}
                   className="hover:text-amber-400 transition-colors whitespace-nowrap text-gray-300"
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
-            
+
             {/* Mobile Top Bar Icons */}
             <div className="flex items-center space-x-3 md:hidden">
-              {socialIcons.slice(0, 3).map(({Icon, label}, index) => (
+              {socialIcons.slice(0, 3).map(({ Icon, label }, index) => (
                 <a
                   key={index}
                   href="#"
-                  className="text-gray-300 hover:text-amber-400 transition-colors"
+                  className="text-gray-300 hover:text-amber-400 transition-colors ml-6"
                   aria-label={`Follow us on ${label}`}
                 >
-                  <Icon size={14} />
+                  <Icon size={20} />
                 </a>
               ))}
             </div>
-            
+
             {/* Favorites (visible on all screen sizes) */}
             <div className="flex items-center">
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="sm"
                 aria-label={`Favorites (${favorites})`}
                 onClick={addToFavorites}
@@ -362,20 +367,22 @@ export default function Navigation() {
                     {favorites}
                   </span>
                 )}
-                <span className="ml-1.5 hidden md:inline text-xs">Favorites</span>
+                <span className="ml-1.5 hidden md:inline text-xs">
+                  Favorites
+                </span>
               </Button>
             </div>
           </div>
         </div>
       </div>
-      
+
       {/* Main Navigation Bar */}
-      <nav 
+      <nav
         className={`w-full ${
-          isScrolled 
-            ? "bg-black/95 backdrop-blur-md shadow-lg" 
+          isScrolled
+            ? "bg-black/95 backdrop-blur-md shadow-lg"
             : "bg-gradient-to-r from-gray-900 via-gray-800 to-black"
-        } text-white fixed top-12 md:top-10 z-40 transition-all duration-300 border-b border-gray-800`}
+        } text-white fixed top-12 md:top-10 z-40 transition-all duration-300 border-b border-gray-800 min-h-24`} // Changed h-6 to min-h-12
       >
         <div className="container mx-auto px-4 flex justify-between items-center h-20 md:h-20 relative">
           {/* Logo */}
@@ -383,7 +390,9 @@ export default function Navigation() {
             <img
               src="https://i.postimg.cc/RF3645kp/kigali-view-high-resolution-logo-removebg-preview.png"
               alt="Kigali View"
-              className={`transition-all duration-300 ${isScrolled ? "h-10 md:h-12" : "h-12 md:h-14"}`}
+              className={`transition-all duration-300 ${
+                isScrolled ? "h-10 md:h-12" : "h-12 md:h-14"
+              }`}
             />
           </Link>
 
@@ -413,14 +422,21 @@ export default function Navigation() {
                     aria-expanded={openDropdown === key}
                   >
                     <span>{formatNavLabel(key)}</span>
-                    <ChevronDown size={14} className="transition-transform group-hover:rotate-180" />
+                    <ChevronDown
+                      size={14}
+                      className="transition-transform group-hover:rotate-180"
+                    />
                   </button>
-                  
+
                   {/* Mega Dropdown Menu */}
-                  <div 
+                  <div
                     className={`absolute left-1/2 -translate-x-1/2 mt-2 w-72 bg-gray-800 text-white rounded-lg shadow-xl py-3 px-2
                       transition-all duration-200 z-50 border border-gray-700
-                      ${openDropdown === key ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
+                      ${
+                        openDropdown === key
+                          ? "opacity-100 visible translate-y-0"
+                          : "opacity-0 invisible -translate-y-2"
+                      }`}
                     onMouseEnter={() => setOpenDropdown(key)}
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
@@ -431,8 +447,12 @@ export default function Navigation() {
                           href={item.link}
                           className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-700 rounded-md transition-colors group"
                         >
-                          <span className="text-amber-400">{categoryIcons[key] || <Globe size={16} />}</span>
-                          <span className="group-hover:translate-x-1 transition-transform">{item.label}</span>
+                          <span className="text-amber-400">
+                            {categoryIcons[key] || <Globe size={16} />}
+                          </span>
+                          <span className="group-hover:translate-x-1 transition-transform">
+                            {item.label}
+                          </span>
                         </Link>
                       ))}
                     </div>
@@ -446,16 +466,16 @@ export default function Navigation() {
           <div className="flex items-center space-x-2">
             {/* Search */}
             <div className="relative" ref={searchContainerRef}>
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="sm"
-                onClick={() => setIsSearching(!isSearching)} 
+                onClick={() => setIsSearching(!isSearching)}
                 aria-label="Search"
                 className="hover:text-amber-400 text-gray-200"
               >
                 <Search size={20} />
               </Button>
-              
+
               {/* Search Dropdown */}
               {isSearching && (
                 <div className="absolute right-0 mt-2 w-64 md:w-80 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden z-50">
@@ -470,26 +490,26 @@ export default function Navigation() {
                         className="flex-1 border-0 bg-gray-900 text-white focus-visible:ring-0 focus-visible:ring-offset-0 h-9"
                       />
                       {searchQuery && (
-                        <Button 
-                          type="button" 
-                          variant="ghost" 
-                          size="icon" 
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
                           className="h-9 w-9 text-gray-400 hover:text-white"
                           onClick={() => setSearchQuery("")}
                         >
                           <X size={16} />
                         </Button>
                       )}
-                      <Button 
-                        type="submit" 
-                        variant="default" 
+                      <Button
+                        type="submit"
+                        variant="default"
                         className="h-9 rounded-none bg-amber-500 hover:bg-amber-600 text-black"
                       >
                         <Search size={16} />
                       </Button>
                     </div>
                   </form>
-                  
+
                   {/* Search Results */}
                   {searchResults.length > 0 && (
                     <div className="max-h-64 overflow-y-auto border-t border-gray-700">
@@ -504,24 +524,30 @@ export default function Navigation() {
                           onClick={clearSearch}
                         >
                           <div className="mt-0.5 text-amber-400">
-                            {categoryIcons[result.category] || <Globe size={14} />}
+                            {categoryIcons[result.category] || (
+                              <Globe size={14} />
+                            )}
                           </div>
                           <div>
-                            <div className="text-sm font-medium">{result.label}</div>
-                            <div className="text-xs text-gray-400">{result.formattedCategory}</div>
+                            <div className="text-sm font-medium">
+                              {result.label}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {result.formattedCategory}
+                            </div>
                           </div>
                         </Link>
                       ))}
                     </div>
                   )}
-                  
+
                   {/* No Results State */}
                   {searchQuery && searchResults.length === 0 && (
                     <div className="p-4 text-center text-gray-400 text-sm">
                       <p>No results found. Try a different search term.</p>
                     </div>
                   )}
-                  
+
                   {/* Empty State */}
                   {!searchQuery && (
                     <div className="p-3 text-xs text-gray-400">
@@ -531,23 +557,23 @@ export default function Navigation() {
                 </div>
               )}
             </div>
-            
+
             {/* Mobile Menu Button */}
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   className="lg:hidden text-white"
                   aria-label="Open Menu"
                 >
-                  <Menu size={24} />
+                  <Menu size={28} />
                 </Button>
               </SheetTrigger>
 
               {/* Mobile Menu Content */}
-              <SheetContent 
-                side="right" 
+              <SheetContent
+                side="right"
                 className="w-full max-w-md bg-gradient-to-b from-gray-900 to-black text-white border-l border-gray-800 p-0"
               >
                 <SheetHeader className="p-4 border-b border-gray-800">
@@ -558,11 +584,13 @@ export default function Navigation() {
                       className="h-12"
                     />
                     <SheetClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-                      <X className="h-5 w-5 text-white" />
+                      {/* <X className="h-5 w-5 text-white" /> */}
                       <span className="sr-only">Close</span>
                     </SheetClose>
                   </div>
-                  <SheetTitle className="text-amber-400 mt-2">Discover Kigali</SheetTitle>
+                  <SheetTitle className="text-amber-400 mt-2">
+                    Discover Kigali
+                  </SheetTitle>
                   <SheetDescription className="text-gray-400">
                     Experience the beauty of Rwanda's capital city
                   </SheetDescription>
@@ -571,7 +599,9 @@ export default function Navigation() {
                 <div className="overflow-y-auto max-h-[calc(100vh-150px)] p-4">
                   {/* Main Navigation Links */}
                   <div className="space-y-1 mb-6">
-                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Main Navigation</h3>
+                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
+                      Main Navigation
+                    </h3>
                     {mainLinks.map((link, index) => (
                       <Link
                         key={index}
@@ -584,40 +614,51 @@ export default function Navigation() {
                       </Link>
                     ))}
                   </div>
-                
+
                   {/* Mobile Menu Categories */}
                   <div className="space-y-1 pb-2">
-                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Explore Categories</h3>
+                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
+                      Explore Categories
+                    </h3>
                     {Object.entries(navItems).map(([key, items]) => (
-                      <div key={key} className="border-b border-gray-800 pb-2 mb-2 last:border-0">
+                      <div
+                        key={key}
+                        className="border-b border-gray-800 pb-2 mb-2 last:border-0"
+                      >
                         <button
                           onClick={() => handleDropdownToggle(key)}
                           className="flex items-center justify-between w-full text-md font-medium text-white py-2 hover:text-amber-400 transition-colors"
                           aria-expanded={openDropdown === key}
                         >
                           <div className="flex items-center space-x-2">
-                            <span className="text-amber-400">{categoryIcons[key] || <Globe size={18} />}</span>
+                            <span className="text-amber-400">
+                              {categoryIcons[key] || <Globe size={18} />}
+                            </span>
                             <span>{formatNavLabel(key)}</span>
                           </div>
                           <ChevronDown
                             size={18}
                             className={`transition-transform duration-300 ${
-                              openDropdown === key ? "rotate-180 text-amber-400" : ""
+                              openDropdown === key
+                                ? "rotate-180 text-amber-400"
+                                : ""
                             }`}
                           />
                         </button>
-                        
+
                         {/* Mobile Dropdown Items */}
-                        <div 
+                        <div
                           className={`transition-all duration-300 overflow-hidden ${
-                            openDropdown === key ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                            openDropdown === key
+                              ? "max-h-96 opacity-100"
+                              : "max-h-0 opacity-0"
                           }`}
                         >
                           <div className="pl-8 pt-1 pb-2 space-y-1">
                             {items.map((item, index) => (
-                              <Link 
-                                key={index} 
-                                href={item.link} 
+                              <Link
+                                key={index}
+                                href={item.link}
                                 className="flex items-center space-x-2 text-gray-300 hover:text-amber-400 py-1.5 rounded transition-colors text-sm"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
@@ -632,11 +673,13 @@ export default function Navigation() {
 
                   {/* Secondary Links */}
                   <div className="mt-4 space-y-3 pb-4 border-t border-gray-800 pt-4">
-                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Additional Resources</h3>
+                    <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
+                      Additional Resources
+                    </h3>
                     {secondaryLinks.map((link, index) => (
-                      <Link 
-                        key={index} 
-                        href={link.href} 
+                      <Link
+                        key={index}
+                        href={link.href}
                         className="flex items-center space-x-2 text-gray-300 hover:text-amber-400 py-1 text-sm"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -649,7 +692,7 @@ export default function Navigation() {
                 <SheetFooter className="p-4 border-t border-gray-800">
                   {/* Mobile Social Icons */}
                   <div className="flex justify-center space-x-4 mb-4">
-                    {socialIcons.map(({Icon, label}, index) => (
+                    {socialIcons.map(({ Icon, label }, index) => (
                       <a
                         key={index}
                         href="#"
@@ -660,10 +703,10 @@ export default function Navigation() {
                       </a>
                     ))}
                   </div>
-                  
+
                   {/* Favorites Button */}
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="w-full border-gray-700 text-amber-400 hover:text-amber-300 hover:border-amber-600"
                     onClick={addToFavorites}
                   >
@@ -675,7 +718,7 @@ export default function Navigation() {
                       </span>
                     )}
                   </Button>
-                  
+
                   {/* Copyright */}
                   <div className="mt-4 text-center text-xs text-gray-400">
                     <p>© 2025 Kigali View</p>
@@ -687,7 +730,7 @@ export default function Navigation() {
           </div>
         </div>
       </nav>
-      
+
       {/* Spacer to push content below fixed navigation */}
       <div className="h-28 md:h-32"></div>
     </>
