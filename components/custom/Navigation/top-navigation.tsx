@@ -139,11 +139,27 @@ const mainLinks = [
 ];
 
 const socialIcons = [
-  { Icon: Facebook, label: "Facebook" },
-  { Icon: Twitter, label: "Twitter" },
-  { Icon: Instagram, label: "Instagram" },
-  { Icon: Linkedin, label: "LinkedIn" },
-  { Icon: Youtube, label: "YouTube" },
+  {
+    Icon: Facebook,
+    label: "Facebook",
+    url: "https://www.facebook.com/your-profile",
+  },
+  { Icon: Twitter, label: "Twitter", url: "https://twitter.com/your-profile" },
+  {
+    Icon: Instagram,
+    label: "Instagram",
+    url: "https://www.instagram.com/your-profile",
+  },
+  {
+    Icon: Linkedin,
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/your-profile",
+  },
+  {
+    Icon: Youtube,
+    label: "YouTube",
+    url: "https://www.youtube.com/c/your-channel",
+  },
 ];
 
 export default function Navigation() {
@@ -158,20 +174,26 @@ export default function Navigation() {
   const [favorites, setFavorites] = useState(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
-  const [screenSize, setScreenSize] = useState('desktop');
+  const [screenSize, setScreenSize] = useState("desktop");
 
   // Function to get icon size based on screen size
-  const getIconSize = (defaultSize = 16, smallSize = 16, mediumSize = 20, largeSize = 24) => {
-    if (screenSize === 'mobile') return smallSize;
-    if (screenSize === 'tablet') return mediumSize;
+  const getIconSize = (
+    defaultSize = 16,
+    smallSize = 16,
+    mediumSize = 20,
+    largeSize = 24
+  ) => {
+    if (screenSize === "mobile") return smallSize;
+    if (screenSize === "tablet") return mediumSize;
     return largeSize;
   };
 
   // Function to update category icons based on screen size
   const getResponsiveCategoryIcon = (key) => {
-    const iconSize = screenSize === 'mobile' ? 14 : screenSize === 'tablet' ? 16 : 18;
+    const iconSize =
+      screenSize === "mobile" ? 14 : screenSize === "tablet" ? 16 : 18;
     const IconComponent = categoryIcons[key] || <Globe size={iconSize} />;
-    
+
     // Clone the element with the new size
     return React.cloneElement(IconComponent, { size: iconSize });
   };
@@ -179,19 +201,19 @@ export default function Navigation() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setScreenSize('mobile');
+        setScreenSize("mobile");
       } else if (window.innerWidth < 1024) {
-        setScreenSize('tablet');
+        setScreenSize("tablet");
       } else {
-        setScreenSize('desktop');
+        setScreenSize("desktop");
       }
     };
 
     // Initial check
     handleResize();
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -283,16 +305,20 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-10 sm:h-12 md:h-12 text-xs sm:text-sm">
             {/* Social icons - hide some on mobile */}
             <div className="flex items-center space-x-2 sm:space-x-4">
-              {socialIcons.slice(0, screenSize === 'mobile' ? 3 : 5).map(({ Icon, label }, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-gray-300 hover:text-amber-400 transition-colors"
-                  aria-label={`Follow us on ${label}`}
-                >
-                  <Icon size={smallIconSize} className="md:w-4 md:h-4" />
-                </a>
-              ))}
+              {socialIcons
+                .slice(0, screenSize === "mobile" ? 5 : 5) // Adjust the slicing logic if needed
+                .map(({ Icon, label, url }, index) => (
+                  <a
+                    key={index}
+                    href={url} // Updated to use actual URL
+                    className="text-gray-300 hover:text-amber-400 transition-colors"
+                    aria-label={`Follow us on ${label}`}
+                    target="_blank" // Opens in a new tab
+                    rel="noopener noreferrer" // For security purposes
+                  >
+                    <Icon size={smallIconSize} className="md:w-4 md:h-4" />
+                  </a>
+                ))}
             </div>
 
             {/* Main links - only show on tablet and desktop */}
@@ -350,17 +376,17 @@ export default function Navigation() {
               src="https://i.postimg.cc/RF3645kp/kigali-view-high-resolution-logo-removebg-preview.png"
               alt="Kigali View"
               className={`transition-all duration-300 ${
-                isScrolled 
-                  ? screenSize === 'mobile' 
-                    ? "h-10" 
-                    : screenSize === 'tablet' 
-                      ? "h-14" 
-                      : "h-16" 
-                  : screenSize === 'mobile' 
-                    ? "h-12" 
-                    : screenSize === 'tablet' 
-                      ? "h-16" 
-                      : "h-20"
+                isScrolled
+                  ? screenSize === "mobile"
+                    ? "h-10"
+                    : screenSize === "tablet"
+                    ? "h-14"
+                    : "h-16"
+                  : screenSize === "mobile"
+                  ? "h-12"
+                  : screenSize === "tablet"
+                  ? "h-16"
+                  : "h-20"
               }`}
             />
           </Link>
@@ -539,7 +565,7 @@ export default function Navigation() {
                       Discover Kigali
                     </SheetTitle>
                     <SheetDescription className="text-gray-400 text-sm sm:text-base">
-                      Experience the beauty of Rwanda's capital city
+                      Experience the beauty of Rwanda&apos;s capital city
                     </SheetDescription>
                   </SheetHeader>
 
@@ -556,7 +582,9 @@ export default function Navigation() {
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           <span className="text-amber-400">
-                            {React.cloneElement(link.icon, { size: smallIconSize })}
+                            {React.cloneElement(link.icon, {
+                              size: smallIconSize,
+                            })}
                           </span>
                           <span className="font-medium">{link.label}</span>
                         </Link>
@@ -618,7 +646,7 @@ export default function Navigation() {
                     </div>
                   </div>
 
-                  <SheetFooter className="p-3 sm:p-4 border-t border-gray-800 flex-shrink-0">
+                  {/* <SheetFooter className="p-3 sm:p-4 border-t border-gray-800 flex-shrink-0">
                     <div className="flex justify-center space-x-4 sm:space-x-6 mb-3 sm:mb-4">
                       {socialIcons.map(({ Icon, label }, index) => (
                         <a
@@ -627,18 +655,28 @@ export default function Navigation() {
                           className="text-white hover:text-amber-400 transition-colors"
                           aria-label={`Follow us on ${label}`}
                         >
-                          <Icon size={screenSize === 'mobile' ? 18 : screenSize === 'tablet' ? 20 : 24} />
+                          <Icon
+                            size={
+                              screenSize === "mobile"
+                                ? 18
+                                : screenSize === "tablet"
+                                ? 20
+                                : 24
+                            }
+                          />
                         </a>
                       ))}
                     </div>
 
                     <Button
                       variant="outline"
-                      className="w-full border-gray-700 text-amber-400 hover:text-amber-300 hover:border-amber-600 text-sm sm:text-base md:text-lg py-2 sm:py-3 md:py-4"
+                      className="w-full border-gray-700 text-amber-400 hover:text-amber-300 hover:border-amber-600 text-sm sm:text-base md:text-lg py-2 sm:py-3 md:py-4 sm:mt-5 sm:mx-4 sm:my-2"
                       onClick={addToFavorites}
                     >
                       <Heart size={smallIconSize} className="mr-2" />
-                      <span className="text-xs sm:text-sm md:text-base">Save to Favorites</span>
+                      <span className="text-xs sm:text-sm md:text-base">
+                        Save to Favorites
+                      </span>
                       {favorites > 0 && (
                         <span className="ml-2 bg-amber-500 text-black text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
                           {favorites}
@@ -648,9 +686,11 @@ export default function Navigation() {
 
                     <div className="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-gray-400">
                       <p>© 2025 Kigali View</p>
-                      <p className="mt-1 text-xs sm:text-sm">Experience the beauty of Rwanda</p>
+                      <p className="mt-1 text-xs sm:text-sm">
+                        Experience the beauty of Rwanda
+                      </p>
                     </div>
-                  </SheetFooter>
+                  </SheetFooter> */}
                 </div>
               </SheetContent>
             </Sheet>

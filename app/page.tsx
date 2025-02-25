@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -164,19 +164,19 @@ const ColumbusSection = () => {
         Yes, KIGALI
       </h2>
       <p className="columbus-paragraph text-lg md:text-xl text-gray-600 mb-6 mx-auto max-w-2xl">
-        You may have your opinions about Kigali — or maybe you don't. We
-        understand. While the world has been busy not thinking about us, we've
-        been quietly stacking up new accolades, accomplishments, and
+        You may have your opinions about Kigali — or maybe you don&apos;t. We
+        understand. While the world has been busy not thinking about us,
+        we&apos;ve been quietly stacking up new accolades, accomplishments, and
         experiences. Year after year, list after list, people are starting to
-        see the greatness we've always known was here. Now is the time we stop
-        keeping it to ourselves.
+        see the greatness we&apos;ve always known was here. Now is the time we
+        stop keeping it to ourselves.
       </p>
       <p className="columbus-description text-lg md:text-xl text-gray-600 mb-6 mx-auto max-w-2xl">
         A city reborn from its past, a beacon of innovation and progress in
         Africa, a culinary scene bursting with flavor, art and culture that tell
         stories of resilience and hope, and so much more.
       </p>
-      <p className="columbus-cta text-lg md:text-xl font-bold text-orange-500 uppercase mt-8">
+      <p className="columbus-cta text-lg md:text-xl font-bold text-amber-400 uppercase mt-8">
         Can all of this exist in one city? Yes, Kigali.
       </p>
     </div>
@@ -185,10 +185,11 @@ const ColumbusSection = () => {
 
 const ColumbusAwardsSection = () => {
   return (
-    <div className="columbus-awards-section py-10 px-6 bg-gray-50">
+    <div className="columbus-awards-section py-10 px-6">
       <div className="columbus-content flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
         {/* Left side: Logo and Text */}
-        <div className="columbus-left flex flex-col items-center md:items-start md:w-1/2 space-y-6">
+        <div className="columbus-left flex flex-col items-center md:items-start md:w-1/2 space-y-6 ml-4 md:ml-6">
+
           <div className="columbus-logo">
             <img
               src="https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png"
@@ -218,7 +219,7 @@ const ColumbusAwardsSection = () => {
         <div className="columbus-video w-full md:w-1/2">
           <iframe
             width="100%"
-            height="315"
+            height="415"
             src="https://www.youtube.com/embed/v1SIZoSfoIc?autoplay=1&mute=1&si=rllBckTDhm9Ke4aT"
             title="Columbus Video"
             frameBorder="0"
@@ -368,7 +369,7 @@ const ColumbusNewsSection = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h3 className="text-lg font-semibold text-red-600 uppercase tracking-wider">
+        <h3 className="text-lg font-semibold text-amber-400 uppercase tracking-wider">
           KIGALI IN THE NEWS
         </h3>
         <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -435,7 +436,7 @@ const ColumbusNewsSection = () => {
       <div className="mt-8 text-center">
         <button
           onClick={toggleShowMore}
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-red-700 transition-colors duration-300"
         >
           {showMore ? "Show Less" : "See More"}
         </button>
@@ -451,7 +452,7 @@ const App = () => {
         <div className="md:w-1/2 space-y-6">
           <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
             Explore. Earn. Redeem.
-            <span className="block text-red-600 mt-2">in Kigali!</span>
+            <span className="block text-amber-400 mt-2">in Kigali!</span>
           </h2>
 
           <div className="space-y-4">
@@ -624,7 +625,7 @@ function BlogPosts() {
                 </p>
                 <a
                   href={post.link}
-                  className="inline-flex items-center mt-auto text-green-600 transition-colors duration-200 hover:text-green-800"
+                  className="inline-flex items-center mt-auto text-amber-400 transition-colors duration-200 hover:text-amber-600"
                 >
                   <span>Read More</span>
                   <ArrowRightIcon className="w-5 h-5" />
@@ -635,7 +636,7 @@ function BlogPosts() {
         </div>
 
         <div className="flex justify-center mt-8">
-          <button className="px-8 py-3 text-white transition-colors duration-200 bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2">
+          <button className="px-8 py-3 text-white transition-colors duration-200 bg-amber-400 rounded-lg hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2">
             View More Blogs
           </button>
         </div>
@@ -674,7 +675,7 @@ const HotelSearch = () => {
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300 mb-4 animate-fade-in">
-            Discover Your Perfect Stay
+            Discover Your Perfect Stay in <span className="text-transparent bg-gradient-to-r from-[#00A9E0] via-[#FCD116] to-[#007847] bg-clip-text">RWANDA</span>
           </h2>
           <p className="text-lg md:text-xl text-blue-100 font-light mb-6">
             Exclusive Member Rates & Luxury Amenities Await
@@ -793,7 +794,7 @@ const HotelSearch = () => {
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
             </svg>
-            <span>SSL Secure Booking</span>
+            <span>SSL Secure Booking and 5⭐hotel</span>
           </div>
           <div className="flex items-center space-x-2">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -847,34 +848,40 @@ const HotelCheck = () => {
       date: "Jan 20th",
       location: "Kigali City Center",
       link: "http://www.getupandgroove.com",
+      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "WNW Wednesday",
       date: "Jan 29th",
       location: "Pili Pili",
       link: "http://www.wnwwednesday.com",
+      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "12 Hours in His Presence",
       date: "Feb 2nd",
       location: "BK Arena",
       link: "http://www.12hoursinhispresence.com",
+      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "Diva Hangout Party",
       date: "Jan 31st",
       location: "Silverback Mall",
       link: "http://www.divahangoutparty.com",
+      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "Rwanda International Film Festival",
       date: "Feb 1st",
       location: "Kigali Convention Center",
+      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "Kigali International Jazz Festival",
       date: "Feb 1st",
       location: "Kigali Convention Center",
+      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
   ];
 
@@ -884,36 +891,42 @@ const HotelCheck = () => {
       date: "Mar 7th",
       location: "Nyungwe Forest National Park",
       link: "https://www.pantheradventures.com/",
+      image: "https://i.postimg.cc/QMNvVCJV/pexels-madknoxxdeluxe-30487817.jpg", // Add image URL
     },
     {
       name: "Nyungwe Marathon",
       date: "Mar 8th",
       location: "Nyungwe Forest National Park",
       link: "https://www.pantheradventures.com/",
+      image: "https://i.postimg.cc/QMNvVCJV/pexels-madknoxxdeluxe-30487817.jpg", // Add image URL
     },
     {
       name: "OSU Men's Volleyball vs USC",
       date: "Jan 31",
       location: "Covelli Center",
       link: "#", // Add a link if available
+      image: "https://i.postimg.cc/QMNvVCJV/pexels-madknoxxdeluxe-30487817.jpg", // Add image URL
     },
     {
       name: "Penn State vs. UCLA Men's Volleyball",
       date: "Jan 31",
       location: "Covelli Center",
       link: "#", // Add a link if available
+      image: "https://i.postimg.cc/QMNvVCJV/pexels-madknoxxdeluxe-30487817.jpg", // Add image URL
     },
     {
       name: "UCLA vs. Michigan State",
       date: "Feb 1st",
       location: "Covelli Center",
       link: "#", // Add a link if available
+      image: "https://i.postimg.cc/QMNvVCJV/pexels-madknoxxdeluxe-30487817.jpg", // Add image URL
     },
     {
       name: "UCLA vs. Penn State",
       date: "Feb 2nd",
       location: "Covelli Center",
       link: "#", // Add a link if available
+      image: "https://i.postimg.cc/QMNvVCJV/pexels-madknoxxdeluxe-30487817.jpg", // Add image URL
     },
   ];
 
@@ -921,7 +934,7 @@ const HotelCheck = () => {
     <div className="container mx-auto px-4 py-8">
       {/* Festivals Section */}
       <section className="mb-12">
-        <h3 className="text-3xl font-bold mb-6 text-center text-blue-600">
+        <h3 className="text-3xl font-bold mb-6 text-center text-amber-400">
           Festivals
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -930,23 +943,29 @@ const HotelCheck = () => {
               key={index}
               className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
             >
+              {/* Display image */}
+              <img
+                src={event.image}
+                alt={event.name}
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
               <a
                 href={event.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:text-blue-700 text-sm"
+                className="text-amber-900 hover:text-blue-700 text-sm mt-2 block"
               >
                 {event.date}
               </a>
               <div className="text-xl font-semibold mt-2">{event.name}</div>
-              <div className="text-gray-600 mt-2 flex items-center">
+              <div className="text-amber-600 mt-2 flex items-center">
                 <FaMapMarkerAlt className="mr-2" /> {event.location}
               </div>
             </div>
           ))}
         </div>
         <div className="flex justify-center mt-6">
-          <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+          <button className="bg-amber-500 text-white px-6 py-2 rounded-lg hover:bg-amber-600 transition-colors duration-300">
             View Annual Festivals
           </button>
         </div>
@@ -954,7 +973,7 @@ const HotelCheck = () => {
 
       {/* Sporting Events Section */}
       <section>
-        <h3 className="text-4xl font-semibold mb-6 text-center text-green-600">
+        <h3 className="text-4xl font-semibold mb-6 text-center text-amber-600">
           Sporting Events
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -963,23 +982,29 @@ const HotelCheck = () => {
               key={index}
               className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
             >
+              {/* Display image */}
+              <img
+                src={event.image}
+                alt={event.name}
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
               <a
                 href={event.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:text-blue-700 text-sm"
+                className="text-amber-900 hover:text-blue-700 text-sm mt-2 block"
               >
                 {event.date}
               </a>
               <div className="text-xl font-semibold mt-2">{event.name}</div>
-              <div className="text-gray-600 mt-2 flex items-center">
+              <div className="text-amber-600 mt-2 flex items-center">
                 <FaMapMarkerAlt className="mr-2" /> {event.location}
               </div>
             </div>
           ))}
         </div>
         <div className="flex justify-center mt-6">
-          <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+          <button className="bg-amber-500 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-300">
             View All Events
           </button>
         </div>
@@ -1040,11 +1065,11 @@ const Marketplace = () => {
         <h1 className="text-4xl font-bold mb-4">EXPLORE OUR MARKETPLACE</h1>
         <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
           Discover Kigali with our free experiential trails or save on admission
-          tickets to some of the city's most popular attractions.
+          tickets to some of the city&apos;s most popular attractions.
         </p>
         <a
           href="#"
-          className="inline-block bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          className="inline-block bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-300"
         >
           View All Passes
         </a>
@@ -1065,7 +1090,7 @@ const Marketplace = () => {
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
               <p className="text-gray-600 mb-4">{card.description}</p>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+              <button className="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors duration-300">
                 Learn More
               </button>
             </div>
@@ -1184,7 +1209,7 @@ const ColumbusSnapshots = () => {
         <h2 className="text-3xl font-bold mb-4">Yes, KIGALI</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Share your experiences in Kigali with us on social by using{" "}
-          <strong>#Kigali</strong>. We’d love to see your favorite moments,
+          <strong className="text-amber-500">#Kigali</strong>. We’d love to see your favorite moments,
           whether you’re exploring the city’s hidden gems, enjoying the local
           food scene, or simply soaking in the atmosphere. Tag us and be part of
           the Kigali community!
@@ -1216,7 +1241,7 @@ const ColumbusSnapshots = () => {
       <div className="text-center mt-8">
         <button
           onClick={handleToggle}
-          className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          className="bg-amber-500 text-white px-6 py-2 rounded-lg hover:bg-amber-600 transition-colors duration-300"
         >
           {showAll ? "Show Less" : "Read More"}
         </button>
