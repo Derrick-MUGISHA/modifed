@@ -56,7 +56,7 @@ const formatNavLabel = (key: string): string => {
 
 const navItems = {
   events: [
-    { label: "Cultural Festivals", link: "/upcoming" },
+    { label: "Cultural Festivals", link: "/events/upcoming" },
     { label: "KigaliUp", link: "/festivals" },
     { label: "Music Concerts", link: "/concerts" },
     { label: "Sports Events", link: "/exhibitions" },
