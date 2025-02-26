@@ -59,7 +59,7 @@ const navItems = {
     { label: "Cultural Festivals", link: "/events/upcoming" },
     { label: "KigaliUp", link: "/events/festivals" },
     { label: "Music Concerts", link: "/events/concerts" },
-    { label: "Sports Events", link: "/exhibitions" },
+    { label: "Sports Events", link: "/events/exhibitions" },
     { label: "Food Festivals", link: "/art-shows" },
     { label: "Art Exhibitions", link: "/film-festivals" },
     { label: "Theatre & Comedy", link: "/concerts" },
