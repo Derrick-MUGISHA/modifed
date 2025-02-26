@@ -25,7 +25,7 @@ const ImageCarousel = () => {
     },
     {
       src: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/10/19/08/99.jpg",
-      text: "Discover Kigali s Hidden Gems",
+      text: "Discover Kigali's Hidden Gems",
     },
   ];
 
