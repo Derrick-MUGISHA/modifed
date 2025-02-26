@@ -4,8 +4,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    // Correct the domain to match actual image host
-    domains: ['postimg.cc', 'media.globalcitizen.org'], // Add the correct domains here
+    // Add the correct domains for image sources
+    domains: ['postimg.cc', 'media.globalcitizen.org', 'i.postimg.cc'], // Add 'i.postimg.cc' here
   },
   webpack(config) {
     // Modify the Webpack configuration if needed
