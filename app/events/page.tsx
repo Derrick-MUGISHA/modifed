@@ -102,7 +102,12 @@ const CustomImageCarousel = () => {
     </div>
   );
 };
-const Calendar = ({ selectedDate, onDateSelect }) => {
+interface CalendarProps {
+  selectedDate: Date | null;
+  onDateSelect: (date: Date) => void;
+}
+
+const Calendar = ({ selectedDate, onDateSelect }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date(2025, 1));
   const daysInMonth = new Date(
     currentMonth.getFullYear(),
@@ -119,7 +124,13 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
   const blanks = Array.from({ length: firstDayOfMonth }, (_, i) => i);
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const isSelected = (day) => {
+  interface DateComparison {
+    day: number;
+    selectedDate: Date | null;
+    currentMonth: Date;
+  }
+
+  const isSelected = (day: number): boolean => {
     if (!selectedDate) return false;
     return (
       day === selectedDate.getDate() &&
