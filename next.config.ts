@@ -1,14 +1,27 @@
-// next.config.js
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    // Add the correct domains for image sources
-    domains: ['postimg.cc', 'media.globalcitizen.org', 'i.postimg.cc', 'cyclingflash.ams3.cdn.digitaloceanspaces.com',], // Add 'i.postimg.cc' here
+    domains: [
+      'postimg.cc',
+      'media.globalcitizen.org',
+      'i.postimg.cc',
+      'cyclingflash.ams3.cdn.digitaloceanspaces.com',
+      'www.ktpress.rw',
+      'lh5.googleusercontent.com',
+      'upload.wikimedia.org',
+      'encrypted-tbn3.gstatic.com',
+      'media.licdn.com',
+      'paanvuusafaris.com',
+      'www.carolinesyrup.com',
+      'www.onthegotours.com',
+      'africantravelinc.com',
+      'visitrwanda.com',
+      'm.mightytravels.com',
+    ],
   },
   webpack(config) {
-    // Modify the Webpack configuration if needed
     return config;
   },
   async redirects() {

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Home from "./intropage/page";
-
+import Image from "next/image";
 
 const PromotionalSlider = () => {
   const slides = [
@@ -116,7 +116,6 @@ const ColumbusAwardsSection = () => {
       <div className="columbus-content flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
         {/* Left side: Logo and Text */}
         <div className="columbus-left flex flex-col items-center md:items-start md:w-1/2 space-y-6 ml-4 md:ml-6">
-
           <div className="columbus-logo">
             <img
               src="https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png"
@@ -322,13 +321,19 @@ const ColumbusNewsSection = () => {
                 {/* Image Container */}
                 <div className="h-48 bg-gray-200 relative">
                   {card.imageUrl && (
-                    <img
+                    <Image
                       src={card.imageUrl}
                       alt={card.title}
                       className="w-full h-full object-cover"
+                      layout="responsive" // Allows the image to scale based on the container's size
+                      width={500} // Specify a base width for the image (the actual width will be adjusted)
+                      height={300} // Specify a base height (to maintain aspect ratio)
                       onError={(e) => {
-                        e.target.style.display = "none";
-                        e.target.nextSibling.style.display = "block";
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        if (target.nextSibling instanceof HTMLElement) {
+                          target.nextSibling.style.display = "block";
+                        }
                       }}
                     />
                   )}
@@ -436,9 +441,12 @@ const App = () => {
         {/* Image/Video Container */}
         <div className="md:w-1/2 flex justify-center">
           <div className="relative max-w-md w-full aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
-            <img
+            <Image
               src="https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png"
               alt="Kigali View App Preview"
+              width={1200} // Width in pixels
+              height={800} // Height in pixels
+              layout="responsive" // Makes the image responsive
               className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -537,9 +545,12 @@ function BlogPosts() {
               key={index}
               className="flex flex-col overflow-hidden transition-shadow duration-300 bg-white rounded-lg shadow-md hover:shadow-lg"
             >
-              <img
-                src={post.image}
-                alt={post.title}
+              <Image
+                src={post.image} // URL of the image
+                alt={post.title} // Alt text for the image
+                width={1200} // The width of the image
+                height={800} // The height of the image
+                layout="responsive" // Makes the image responsive
                 className="object-cover w-full h-48 md:h-56"
               />
 
@@ -578,7 +589,12 @@ const HotelSearch = () => {
   const [children, setChildren] = useState(""); // Track the number of children
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  interface HotelSearchFormEvent extends React.FormEvent<HTMLFormElement> {
+    preventDefault: () => void;
+  }
+
+
+  const handleSubmit = (e: HotelSearchFormEvent): void => {
     e.preventDefault();
     setLoading(true);
 
@@ -602,7 +618,10 @@ const HotelSearch = () => {
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300 mb-4 animate-fade-in">
-            Discover Your Perfect Stay in <span className="text-transparent bg-gradient-to-r from-[#00A9E0] via-[#FCD116] to-[#007847] bg-clip-text">RWANDA</span>
+            Discover Your Perfect Stay in{" "}
+            <span className="text-transparent bg-gradient-to-r from-[#00A9E0] via-[#FCD116] to-[#007847] bg-clip-text">
+              RWANDA
+            </span>
           </h2>
           <p className="text-lg md:text-xl text-blue-100 font-light mb-6">
             Exclusive Member Rates & Luxury Amenities Await
@@ -775,40 +794,46 @@ const HotelCheck = () => {
       date: "Jan 20th",
       location: "Kigali City Center",
       link: "http://www.getupandgroove.com",
-      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
+      image:
+        "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "WNW Wednesday",
       date: "Jan 29th",
       location: "Pili Pili",
       link: "http://www.wnwwednesday.com",
-      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
+      image:
+        "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "12 Hours in His Presence",
       date: "Feb 2nd",
       location: "BK Arena",
       link: "http://www.12hoursinhispresence.com",
-      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
+      image:
+        "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "Diva Hangout Party",
       date: "Jan 31st",
       location: "Silverback Mall",
       link: "http://www.divahangoutparty.com",
-      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
+      image:
+        "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "Rwanda International Film Festival",
       date: "Feb 1st",
       location: "Kigali Convention Center",
-      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
+      image:
+        "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
     {
       name: "Kigali International Jazz Festival",
       date: "Feb 1st",
       location: "Kigali Convention Center",
-      image: "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
+      image:
+        "https://i.postimg.cc/fy59zHzV/pexels-sleeba-thomas-156395977-30788735.jpg", // Add image URL
     },
   ];
 
@@ -1136,10 +1161,10 @@ const ColumbusSnapshots = () => {
         <h2 className="text-3xl font-bold mb-4">Yes, KIGALI</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Share your experiences in Kigali with us on social by using{" "}
-          <strong className="text-amber-500">#Kigali</strong>. We’d love to see your favorite moments,
-          whether you’re exploring the city’s hidden gems, enjoying the local
-          food scene, or simply soaking in the atmosphere. Tag us and be part of
-          the Kigali community!
+          <strong className="text-amber-500">#Kigali</strong>. We’d love to see
+          your favorite moments, whether you’re exploring the city’s hidden
+          gems, enjoying the local food scene, or simply soaking in the
+          atmosphere. Tag us and be part of the Kigali community!
         </p>
       </div>
 
