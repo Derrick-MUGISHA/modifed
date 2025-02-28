@@ -8,7 +8,7 @@ import {
   SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
+  // SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -33,9 +33,10 @@ import {
   Home,
   Hotel,
   Map,
-  LucideIcon,
+  // LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Map icons to categories
 const categoryIcons = {
@@ -54,7 +55,17 @@ const formatNavLabel = (key: string): string => {
   return key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1");
 };
 
-const navItems = {
+type NavItem = { label: string; link: string };
+type NavItems = {
+  events: NavItem[];
+  thingsToDo: NavItem[];
+  restaurants: NavItem[];
+  hotels: NavItem[];
+  neighborhoods: NavItem[];
+  exploreKigali: NavItem[];
+};
+
+const navItems: NavItems = {
   events: [
     { label: "Cultural Festivals", link: "/events/upcoming" },
     { label: "KigaliUp", link: "/events/festivals" },
@@ -163,13 +174,20 @@ const socialIcons = [
 ];
 
 export default function Navigation() {
-  const [isNavigating, setIsNavigating] = useState(false);
-  const [progress, setProgress] = useState(0);
+  // const [isNavigating, setIsNavigating] = useState(false);
+  // const [progress, setProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<
+    {
+      category: string;
+      formattedCategory: string;
+      label: string;
+      link: string;
+    }[]
+  >([]);
   const [isSearching, setIsSearching] = useState(false);
   const [favorites, setFavorites] = useState(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -178,10 +196,8 @@ export default function Navigation() {
 
   // Function to get icon size based on screen size
   const getIconSize = (
-    defaultSize = 16,
-    smallSize = 16,
-    mediumSize = 20,
-    largeSize = 24
+// defaultSize = 16,
+smallSize = 16, mediumSize = 20, largeSize = 24
   ) => {
     if (screenSize === "mobile") return smallSize;
     if (screenSize === "tablet") return mediumSize;
@@ -189,7 +205,7 @@ export default function Navigation() {
   };
 
   // Function to update category icons based on screen size
-  const getResponsiveCategoryIcon = (key) => {
+  const getResponsiveCategoryIcon = (key: keyof typeof categoryIcons) => {
     const iconSize =
       screenSize === "mobile" ? 14 : screenSize === "tablet" ? 16 : 18;
     const IconComponent = categoryIcons[key] || <Globe size={iconSize} />;
@@ -240,8 +256,8 @@ export default function Navigation() {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [isSearching]);
 
-  const handleDropdownToggle = (key) => {
-    setOpenDropdown(openDropdown === key ? null : key);
+  const handleDropdownToggle = (key: string) => {
+    setOpenDropdown((current) => (current === key ? null : key));
   };
 
   useEffect(() => {
@@ -250,7 +266,7 @@ export default function Navigation() {
     }
   }, [isSearching]);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
@@ -289,9 +305,9 @@ export default function Navigation() {
   }
 
   // Get responsive icon sizes
-  const smallIconSize = getIconSize(16, 14, 16, 18);
-  const mediumIconSize = getIconSize(20, 16, 20, 24);
-  const largeIconSize = getIconSize(24, 20, 24, 28);
+  const smallIconSize = getIconSize(14, 16, 18);
+  const mediumIconSize = getIconSize(16, 20, 24);
+  const largeIconSize = getIconSize(20, 24, 28);
 
   return (
     <>
@@ -372,7 +388,7 @@ export default function Navigation() {
         <div className="container mx-auto px-2 sm:px-4 flex justify-between items-center h-16 sm:h-20 md:h-24 relative">
           {/* Logo - resize based on screen and scroll */}
           <Link href="/" className="flex-shrink-0 relative z-10">
-            <img
+            <Image
               src="https://i.postimg.cc/RF3645kp/kigali-view-high-resolution-logo-removebg-preview.png"
               alt="Kigali View"
               className={`transition-all duration-300 ${
@@ -388,6 +404,9 @@ export default function Navigation() {
                   ? "h-16"
                   : "h-20"
               }`}
+              layout="intrinsic" // Automatically calculates size based on the image
+              width={150} // You can choose a fixed width if you want
+              height={150} // Adjust height for your desired aspect ratio
             />
           </Link>
 
@@ -410,31 +429,33 @@ export default function Navigation() {
                   </button>
 
                   <div
-                    className={`absolute left-1/2 -translate-x-1/2 mt-2 w-72 bg-gray-800 text-white rounded-lg shadow-xl py-3 px-2
-                      transition-all duration-200 z-50 border border-gray-700
-                      ${
-                        openDropdown === key
-                          ? "opacity-100 visible translate-y-0"
-                          : "opacity-0 invisible -translate-y-2"
-                      }`}
+                    className={`absolute left-1/2 -translate-x-1/2 mt-2 w-72 bg-gray-800 text-white rounded-lg shadow-xl py-3 px-2 ${
+                      openDropdown === key
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-2"
+                    }`}
                     onMouseEnter={() => setOpenDropdown(key)}
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <div className="grid gap-1 max-h-96 overflow-y-auto">
-                      {navItems[key].map((item, index) => (
-                        <Link
-                          key={index}
-                          href={item.link}
-                          className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-700 rounded-md transition-colors group"
-                        >
-                          <span className="text-amber-400">
-                            {getResponsiveCategoryIcon(key)}
-                          </span>
-                          <span className="group-hover:translate-x-1 transition-transform">
-                            {item.label}
-                          </span>
-                        </Link>
-                      ))}
+                      {navItems[key as keyof NavItems].map(
+                        (item: NavItem, index: number) => (
+                          <Link
+                            key={index}
+                            href={item.link}
+                            className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-700 rounded-md transition-colors group"
+                          >
+                            <span className="text-amber-400">
+                              {getResponsiveCategoryIcon(
+                                key as keyof typeof categoryIcons
+                              )}
+                            </span>
+                            <span className="group-hover:translate-x-1 transition-transform">
+                              {item.label}
+                            </span>
+                          </Link>
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
@@ -502,7 +523,9 @@ export default function Navigation() {
                           onClick={clearSearch}
                         >
                           <div className="mt-0.5 text-amber-400">
-                            {getResponsiveCategoryIcon(result.category)}
+                            {getResponsiveCategoryIcon(
+                              result.category as keyof typeof categoryIcons
+                            )}
                           </div>
                           <div>
                             <div className="text-sm font-medium">
@@ -552,10 +575,25 @@ export default function Navigation() {
                 <div className="flex flex-col h-full">
                   <SheetHeader className="p-3 sm:p-4 border-b border-gray-800 flex-shrink-0">
                     <div className="flex justify-between items-center">
-                      <img
+                      <Image
                         src="https://i.postimg.cc/RF3645kp/kigali-view-high-resolution-logo-removebg-preview.png"
                         alt="Kigali View"
                         className="h-12 sm:h-16 md:h-20"
+                        width={
+                          screenSize === "mobile"
+                            ? 48
+                            : screenSize === "tablet"
+                            ? 64
+                            : 80
+                        } // Adjust width based on screen size
+                        height={
+                          screenSize === "mobile"
+                            ? 48
+                            : screenSize === "tablet"
+                            ? 64
+                            : 80
+                        } // Adjust height based on screen size
+                        layout="intrinsic"
                       />
                       <SheetClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
                         <span className="sr-only">Close</span>
@@ -607,7 +645,9 @@ export default function Navigation() {
                           >
                             <div className="flex items-center space-x-2">
                               <span className="text-amber-400">
-                                {getResponsiveCategoryIcon(key)}
+                                {getResponsiveCategoryIcon(
+                                  key as keyof typeof categoryIcons
+                                )}
                               </span>
                               <span>{formatNavLabel(key)}</span>
                             </div>
