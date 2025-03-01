@@ -28,7 +28,11 @@ const nextConfig: NextConfig = {
       'kinyarwanda.com',
       'www.ugandarwanda-safaris.com',
       'www.nkuringosafaris.com',
-      'rdb.rw'
+      'rdb.rw',
+      'rwandaclothing.com',
+      'cdn.getyourguide.com',
+      'en.igihe.com',
+      'www.rwandaclothing.com',
     ],
   },
   webpack(config) {
