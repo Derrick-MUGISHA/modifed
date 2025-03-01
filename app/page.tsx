@@ -52,9 +52,8 @@ const PromotionalSlider = () => {
               <Image
                 src={slide.image}
                 alt={slide.title}
-                width={1200} // Width for intrinsic scaling
-                height={800} // Height for intrinsic scaling
-                layout="intrinsic" // The image will scale based on its intrinsic size
+                width={1200}
+                height={-1}
                 className="w-full h-full object-cover rounded-lg"
               />
 
@@ -125,7 +124,7 @@ const ColumbusAwardsSection = () => {
               alt="Columbus Logo"
               width={192} // Set width for aspect ratio
               height={192} // Set height for aspect ratio
-              layout="responsive" // Makes the image responsive based on its container
+              // layout="responsive" // Makes the image responsive based on its container
               className="logo-img w-32 md:w-48"
             />
           </div>
@@ -331,7 +330,7 @@ const ColumbusNewsSection = () => {
                       src={card.imageUrl}
                       alt={card.title}
                       className="w-full h-full object-cover"
-                      layout="responsive" // Allows the image to scale based on the container's size
+                      // layout="responsive" // Allows the image to scale based on the container's size
                       width={500} // Specify a base width for the image (the actual width will be adjusted)
                       height={300} // Specify a base height (to maintain aspect ratio)
                       onError={(e) => {
@@ -450,9 +449,9 @@ const App = () => {
             <Image
               src="https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png"
               alt="Kigali View App Preview"
-              width={1200} // Width in pixels
+              width={1300} // Width in pixels
               height={800} // Height in pixels
-              layout="responsive" // Makes the image responsive
+              // layout="responsive" // Makes the image responsive
               className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -556,7 +555,7 @@ function BlogPosts() {
                 alt={post.title} // Alt text for the image
                 width={1200} // The width of the image
                 height={800} // The height of the image
-                layout="responsive" // Makes the image responsive
+                // layout="responsive" // Makes the image responsive
                 className="object-cover w-full h-48 md:h-56"
               />
 
@@ -922,7 +921,7 @@ const HotelCheck = () => {
                 alt={event.name}
                 width={1200} // Width for aspect ratio calculation
                 height={800} // Height for aspect ratio calculation
-                layout="responsive" // Makes the image responsive to container size
+                // layout="responsive" // Makes the image responsive to container size
                 className="w-full h-48 object-cover rounded-t-lg"
               />
               <a
@@ -964,7 +963,7 @@ const HotelCheck = () => {
                 alt={event.name}
                 width={1200} // Set width for aspect ratio
                 height={800} // Set height for aspect ratio
-                layout="responsive" // Makes the image responsive
+                // layout="responsive" // Makes the image responsive
                 className="w-full h-48 object-cover rounded-t-lg"
               />
               <a
@@ -1061,14 +1060,18 @@ const Marketplace = () => {
             key={index}
             className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
-            <Image
-              src={card.image}
-              alt={card.title}
-              width={1000} // Specify width for aspect ratio
-              height={667} // Specify height for aspect ratio
-              layout="responsive" // Makes the image responsive
-              className="object-cover"
-            />
+            {/* Image Container */}
+            <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
+              <Image
+                src={card.image}
+                alt={card.title}
+                width={1000} // Intrinsic width of the image
+                height={667} // Intrinsic height of the image (adjust based on your aspect ratio)
+                className="object-cover w-full h-full"
+              />
+            </div>
+
+            {/* Content */}
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
               <p className="text-gray-600 mb-4">{card.description}</p>
@@ -1209,10 +1212,9 @@ const ColumbusSnapshots = () => {
             <Image
               src={image.src}
               alt={image.alt}
-              width={674} // Set width for aspect ratio calculation
-              height={446} // Set height for aspect ratio calculation
-              layout="responsive" // Makes the image responsive
-              className="object-cover"
+              width={1200} // Intrinsic width of the image
+              height={800} // Intrinsic height of the image
+              className="w-full h-48 object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="text-white text-center text-lg font-semibold p-4">
