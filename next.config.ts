@@ -33,6 +33,8 @@ const nextConfig: NextConfig = {
       'cdn.getyourguide.com',
       'en.igihe.com',
       'www.rwandaclothing.com',
+      'www.airlinepros.com',
+      'cdn.businesstraveller.com',
     ],
   },
   webpack(config) {
