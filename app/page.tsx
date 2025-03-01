@@ -667,6 +667,8 @@ const HotelSearch = () => {
                   onChange={(e) => setCheckOut(e.target.value)}
                   className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                   min={checkIn || new Date().toISOString().split("T")[0]}
+                  title="Check-out date"
+                  placeholder=" "
                 />
               </div>
             </div>
@@ -679,10 +681,13 @@ const HotelSearch = () => {
                 <input
                   type="number"
                   value={adults}
-                  onChange={(e) => setAdults(Math.max(1, e.target.value))}
+                  onChange={(e) => setAdults(String(Math.max(1, parseInt(e.target.value) || 1)))}
                   className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-                  min="1"
+                  min="0"
                   max="10"
+                  title="Number of adults"
+                  placeholder="Enter number of adults"
+                  aria-label="Number of adults"
                 />
               </div>
             </div>
@@ -695,10 +700,13 @@ const HotelSearch = () => {
                 <input
                   type="number"
                   value={children}
-                  onChange={(e) => setChildren(Math.max(0, e.target.value))}
+                  onChange={(e) => setChildren(String(Math.max(0, parseInt(e.target.value) || 0)))}
                   className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                   min="0"
                   max="10"
+                  title="Number of children"
+                  placeholder="Enter number of children"
+                  aria-label="Number of children"
                 />
               </div>
             </div>
