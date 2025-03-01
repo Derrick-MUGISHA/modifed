@@ -49,9 +49,12 @@ const PromotionalSlider = () => {
             className="group relative cursor-pointer transition-all duration-300 rounded-lg overflow-hidden flex-1 min-w-full md:min-w-[380px] hover:flex-[1.5]"
           >
             <div className="relative h-56 md:h-72">
-              <img
+              <Image
                 src={slide.image}
                 alt={slide.title}
+                width={1200} // Width for intrinsic scaling
+                height={800} // Height for intrinsic scaling
+                layout="intrinsic" // The image will scale based on its intrinsic size
                 className="w-full h-full object-cover rounded-lg"
               />
 
@@ -117,9 +120,12 @@ const ColumbusAwardsSection = () => {
         {/* Left side: Logo and Text */}
         <div className="columbus-left flex flex-col items-center md:items-start md:w-1/2 space-y-6 ml-4 md:ml-6">
           <div className="columbus-logo">
-            <img
+            <Image
               src="https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png"
               alt="Columbus Logo"
+              width={192} // Set width for aspect ratio
+              height={192} // Set height for aspect ratio
+              layout="responsive" // Makes the image responsive based on its container
               className="logo-img w-32 md:w-48"
             />
           </div>
@@ -593,7 +599,6 @@ const HotelSearch = () => {
     preventDefault: () => void;
   }
 
-
   const handleSubmit = (e: HotelSearchFormEvent): void => {
     e.preventDefault();
     setLoading(true);
@@ -681,7 +686,11 @@ const HotelSearch = () => {
                 <input
                   type="number"
                   value={adults}
-                  onChange={(e) => setAdults(String(Math.max(1, parseInt(e.target.value) || 1)))}
+                  onChange={(e) =>
+                    setAdults(
+                      String(Math.max(1, parseInt(e.target.value) || 1))
+                    )
+                  }
                   className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                   min="0"
                   max="10"
@@ -700,7 +709,11 @@ const HotelSearch = () => {
                 <input
                   type="number"
                   value={children}
-                  onChange={(e) => setChildren(String(Math.max(0, parseInt(e.target.value) || 0)))}
+                  onChange={(e) =>
+                    setChildren(
+                      String(Math.max(0, parseInt(e.target.value) || 0))
+                    )
+                  }
                   className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                   min="0"
                   max="10"
@@ -904,9 +917,12 @@ const HotelCheck = () => {
               className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
             >
               {/* Display image */}
-              <img
+              <Image
                 src={event.image}
                 alt={event.name}
+                width={1200} // Width for aspect ratio calculation
+                height={800} // Height for aspect ratio calculation
+                layout="responsive" // Makes the image responsive to container size
                 className="w-full h-48 object-cover rounded-t-lg"
               />
               <a
@@ -943,9 +959,12 @@ const HotelCheck = () => {
               className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
             >
               {/* Display image */}
-              <img
+              <Image
                 src={event.image}
                 alt={event.name}
+                width={1200} // Set width for aspect ratio
+                height={800} // Set height for aspect ratio
+                layout="responsive" // Makes the image responsive
                 className="w-full h-48 object-cover rounded-t-lg"
               />
               <a
@@ -1042,10 +1061,13 @@ const Marketplace = () => {
             key={index}
             className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
-            <img
+            <Image
               src={card.image}
               alt={card.title}
-              className="w-full h-48 object-cover"
+              width={1000} // Specify width for aspect ratio
+              height={667} // Specify height for aspect ratio
+              layout="responsive" // Makes the image responsive
+              className="object-cover"
             />
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
@@ -1060,6 +1082,7 @@ const Marketplace = () => {
     </div>
   );
 };
+
 const imageCards = [
   {
     id: 1,
@@ -1183,10 +1206,13 @@ const ColumbusSnapshots = () => {
             key={image.id}
             className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
-            <img
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-48 object-cover"
+              width={674} // Set width for aspect ratio calculation
+              height={446} // Set height for aspect ratio calculation
+              layout="responsive" // Makes the image responsive
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="text-white text-center text-lg font-semibold p-4">

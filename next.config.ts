@@ -19,6 +19,16 @@ const nextConfig: NextConfig = {
       'africantravelinc.com',
       'visitrwanda.com',
       'm.mightytravels.com',
+      'igihe.com',
+      'encrypted-tbn0.gstatic.com',
+      'dynamic-media-cdn.tripadvisor.com',
+      'media-cdn.tripadvisor.com',
+      'lp-cms-production.imgix.net',
+      'fusionestatesafrica.com',
+      'kinyarwanda.com',
+      'www.ugandarwanda-safaris.com',
+      'www.nkuringosafaris.com',
+      'rdb.rw'
     ],
   },
   webpack(config) {
