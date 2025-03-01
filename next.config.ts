@@ -39,6 +39,10 @@ const nextConfig: NextConfig = {
       'via.placeholder.com',
       'd1bvpoagx8hqbg.cloudfront.net',
       'img.evbuc.com',
+      'media.gettyimages.com',
+      'ams3.digitaloceanspaces.com',
+      '365rwanda.com',
+      'kifc.rw',
     ],
   },
   webpack(config) {

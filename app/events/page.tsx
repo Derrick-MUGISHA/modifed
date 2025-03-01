@@ -68,13 +68,17 @@ const CustomImageCarousel = () => {
       {imageSlides.map((slide, index) => (
         <div
           key={index}
+          role="group"
+          aria-label={`Slide ${index + 1} of ${imageSlides.length}`}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
             index === activeIndex ? "opacity-100" : "opacity-0"
           }`}
         >
-          <img
+          <Image
             src={slide.src}
             alt={`Slide ${index + 1}`}
+            width={1200}
+            height={800}
             className="w-full h-full object-cover"
           />
           {/* Gradient Overlay */}
@@ -84,7 +88,7 @@ const CustomImageCarousel = () => {
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               {slide.caption}
             </h2>
-            <button className="px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all duration-300">
+            <button className="px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all duration-300" title="Grid view" aria-label="Grid view">
               Explore More
             </button>
           </div>
@@ -97,13 +101,16 @@ const CustomImageCarousel = () => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            aria-label={`Go to slide ${index + 1}`}
+            title={`Navigate to slide ${index + 1}`}
+            aria-label={`Navigate to slide ${index + 1}`}
             className={`w-4 h-4 rounded-full transition-all duration-300 ${
               index === activeIndex
                 ? "bg-white scale-125"
                 : "bg-gray-500 hover:bg-gray-400"
             }`}
-          />
+          >
+            <span className="sr-only">Navigate to slide {index + 1}</span>
+          </button>
         ))}
       </div>
     </div>
@@ -131,11 +138,11 @@ const Calendar = ({ selectedDate, onDateSelect }: CalendarProps) => {
   const blanks = Array.from({ length: firstDayOfMonth }, (_, i) => i);
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  interface DateComparison {
-    day: number;
-    selectedDate: Date | null;
-    currentMonth: Date;
-  }
+  // interface DateComparison {
+  //   day: number;
+  //   selectedDate: Date | null;
+  //   currentMonth: Date;
+  // }
 
   const isSelected = (day: number): boolean => {
     if (!selectedDate) return false;
@@ -565,10 +572,12 @@ const NewsletterSection = () => {
 
           {/* Image Container */}
           <div className="flex justify-center md:justify-end">
-            <img
+            <Image
               className="w-full max-w-md rounded-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
               src="https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png"
               alt="Newsletter"
+              width={400} // Set the width (in pixels)
+              height={400} // Set the height (in pixels) maintaining aspect ratio
             />
           </div>
         </div>
@@ -576,11 +585,19 @@ const NewsletterSection = () => {
     </section>
   );
 };
-const FeaturedCard = ({ image, title, type }) => (
+interface FeaturedCardProps {
+  image: string;
+  title: string;
+  type: string;
+}
+
+const FeaturedCard = ({ image, title, type }: FeaturedCardProps) => (
   <div className="relative overflow-hidden rounded-lg shadow-lg group transform hover:scale-105 transition-all duration-300 ease-in-out">
-    <img
+    <Image
       src={image}
       alt={title}
+      width={400}
+      height={400}
       className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover"
     />
     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300 ease-in-out"></div>
@@ -595,12 +612,20 @@ const FeaturedCard = ({ image, title, type }) => (
   </div>
 );
 
-const SponsoredCard = ({ image, title, description }) => (
+interface SponsoredCardProps {
+  image: string;
+  title: string;
+  description: string;
+}
+
+const SponsoredCard = ({ image, title, description }: SponsoredCardProps) => (
   <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 ease-in-out">
     <div className="relative">
-      <img
+      <Image
         src={image}
         alt={title}
+        width={400}
+        height={400}
         className="w-full h-48 sm:h-56 md:h-64 object-cover"
       />
       <span className="absolute top-2 right-2 bg-yellow-400 text-black text-xs font-semibold px-3 py-1 rounded-full">
@@ -674,13 +699,27 @@ const FeaturedSections = () => {
     </div>
   );
 };
-const EventCard = ({ title, description, imageUrl, sponsored = false }) => (
+interface EventCardProps {
+  title: string;
+  description: string;
+  imageUrl: string;
+  sponsored?: boolean;
+}
+
+const EventCard = ({
+  title,
+  description,
+  imageUrl,
+  sponsored = false,
+}: EventCardProps) => (
   <div className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
     {/* Image Section */}
     <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
-      <img
+      <Image
         src={imageUrl || "/api/placeholder/400/300"}
         alt={title}
+        width={400}
+        height={300}
         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
       />
       {sponsored && (
