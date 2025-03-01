@@ -294,7 +294,7 @@ const Events = () => {
     {
       id: 9,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Gallery Listening Room",
       location: "Wonderlust Studio",
       recurring: null,
@@ -302,7 +302,7 @@ const Events = () => {
     {
       id: 10,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Hot Stuff: A Sketch Comedy and Music Show",
       location: "Short North Stage",
       recurring: null,
@@ -310,7 +310,7 @@ const Events = () => {
     {
       id: 11,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "25 Reasons to Visit Columbus in 2025",
       location: "Downtown Columbus",
       recurring: "Recurring daily until February 16, 2025",
@@ -318,7 +318,7 @@ const Events = () => {
     {
       id: 12,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636 ",
       title: "Columbus Improv Comedy Meetup!",
       location: "Nest Theatre",
       recurring: null,
