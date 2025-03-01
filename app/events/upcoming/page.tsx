@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
+import styles from './page.module.css';
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Calendar, MapPin, Info, X } from "lucide-react";
 
@@ -81,7 +82,7 @@ const festivals = [
 ];
 
 const CulturalFestivals = () => {
-  const [selectedFestival, setSelectedFestival] = useState(null);
+  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [animateCards, setAnimateCards] = useState(false);
 
@@ -90,7 +91,16 @@ const CulturalFestivals = () => {
     setTimeout(() => setAnimateCards(true), 300);
   }, []);
 
-  const openModal = (festival) => {
+  interface Festival {
+    title: string;
+    description: string;
+    date: string;
+    location: string;
+    image: string;
+    fullDescription: string;
+  }
+
+  const openModal = (festival: Festival): void => {
     setSelectedFestival(festival);
     setIsVisible(true);
   };
@@ -108,7 +118,7 @@ const CulturalFestivals = () => {
             Rwandan Cultural Festivals
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto opacity-0 animate-fade-in-up">
-            Discover the vibrant cultural celebrations that showcase Rwanda's rich heritage, 
+            Discover the vibrant cultural celebrations that showcase Rwanda&apos;s rich heritage, 
             traditional arts, and community spirit throughout the year
           </p>
         </div>
@@ -117,26 +127,25 @@ const CulturalFestivals = () => {
           {festivals.map((festival, index) => (
             <Card
               key={index}
-              className={`overflow-hidden transition-all duration-500 ${
-                animateCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              className={`${styles.card} ${
+                animateCards ? styles.cardVisible : styles.cardOpacity
               }`}
               style={{ 
-                transitionDelay: `${index * 100}ms`,
-                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
+                transitionDelay: `${index * 100}ms`
               }}
             >
-              <div 
-                className="relative h-52 overflow-hidden" 
-                style={{
-                  backgroundImage: `url(${festival.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                  <h3 className="text-2xl font-bold p-4 text-white">
-                    {festival.title}
-                  </h3>
+              <div className={styles.imageContainer}>
+                <div 
+                  className={styles.image}
+                  style={{
+                    backgroundImage: `url(${festival.image})`
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                    <h3 className="text-2xl font-bold p-4 text-white">
+                      {festival.title}
+                    </h3>
+                  </div>
                 </div>
               </div>
               
@@ -168,13 +177,13 @@ const CulturalFestivals = () => {
         <div className="mt-20 p-8 bg-white rounded-xl shadow-lg opacity-0 animate-fade-in-up" style={{ animationDelay: "1.2s" }}>
           <h2 className="text-3xl font-bold mb-6 text-slate-800">Cultural Tourism in Rwanda</h2>
           <p className="text-lg text-slate-600 mb-4">
-            Rwanda's cultural festivals play a vital role in the country's tourism strategy, attracting visitors 
+            Rwanda&apos;s cultural festivals play a vital role in the country&apos;s tourism strategy, attracting visitors 
             from around the world while preserving and celebrating Rwandan heritage. These festivals offer authentic 
-            experiences that showcase Rwanda's remarkable cultural resilience and creative expression.
+            experiences that showcase Rwanda&apos;s remarkable cultural resilience and creative expression.
           </p>
           <p className="text-lg text-slate-600">
             Beyond the wildlife and natural attractions, these cultural celebrations provide deeper insights into 
-            Rwanda's identity, bringing economic benefits to local communities and fostering cultural exchange between 
+            Rwanda&apos;s identity, bringing economic benefits to local communities and fostering cultural exchange between 
             visitors and residents. Each festival represents an opportunity to experience the warmth, creativity, and 
             hospitality that define Rwanda today.
           </p>
@@ -186,16 +195,12 @@ const CulturalFestivals = () => {
         <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="absolute inset-0 bg-black/70" onClick={closeModal}></div>
           <div className={`relative bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-auto transform ${isVisible ? 'scale-100' : 'scale-95'} transition-transform duration-300`}>
-            <div className="relative h-64">
+            <div className={styles.modalImage}>
               <div 
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `url(${selectedFestival.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
+                className={styles.modalImageBackground}
+                style={{ backgroundImage: `url(${selectedFestival.image})` }}
               ></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+              <div className={styles.modalGradient}>
                 <h2 className="text-3xl font-bold text-white">{selectedFestival.title}</h2>
                 <div className="flex gap-4 mt-2">
                   <div className="flex items-center gap-1 text-white/90">

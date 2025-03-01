@@ -1,5 +1,6 @@
 "use client"
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 const CustomImageCarousel = () => {
     const imageSlides = [
@@ -43,7 +44,7 @@ const CustomImageCarousel = () => {
       return () => clearInterval(interval); // Cleanup on component unmount
     }, [imageSlides.length]);
   
-    const goToSlide = (index) => {
+    const goToSlide = (index: number): void => {
       setActiveIndex(index); // Manually set the active slide
     };
     return (
@@ -59,9 +60,11 @@ const CustomImageCarousel = () => {
                 className="w-full h-full absolute inset-0"
                 style={{ transform: `translateX(${index * 100}%)` }}
               >
-                <img
+                <Image
                   src={slide.src}
                   alt={`Slide ${index + 1}`}
+                  width={200}
+                  height={-1}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 text-center">
