@@ -38,6 +38,7 @@ const nextConfig: NextConfig = {
       'img.freepik.com',
       'via.placeholder.com',
       'd1bvpoagx8hqbg.cloudfront.net',
+      'img.evbuc.com',
     ],
   },
   webpack(config) {

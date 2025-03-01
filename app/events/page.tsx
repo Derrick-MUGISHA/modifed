@@ -10,6 +10,8 @@ import {
   Rss,
 } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 const CustomImageCarousel = () => {
   const imageSlides = [
     {
@@ -52,7 +54,11 @@ const CustomImageCarousel = () => {
     return () => clearInterval(interval); // Cleanup on component unmount
   }, [imageSlides.length]);
 
-  const goToSlide = (index) => {
+  interface GoToSlideFunction {
+    (index: number): void;
+  }
+
+  const goToSlide: GoToSlideFunction = (index) => {
     setActiveIndex(index); // Manually set the active slide
   };
 
@@ -91,6 +97,7 @@ const CustomImageCarousel = () => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
             className={`w-4 h-4 rounded-full transition-all duration-300 ${
               index === activeIndex
                 ? "bg-white scale-125"
@@ -143,6 +150,7 @@ const Calendar = ({ selectedDate, onDateSelect }: CalendarProps) => {
     <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
         <button
+          aria-label="Previous month"
           onClick={() =>
             setCurrentMonth(
               new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1)
@@ -157,6 +165,7 @@ const Calendar = ({ selectedDate, onDateSelect }: CalendarProps) => {
           {currentMonth.getFullYear()}
         </div>
         <button
+          aria-label="Next month"
           onClick={() =>
             setCurrentMonth(
               new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
@@ -229,7 +238,7 @@ const Events = () => {
     {
       id: 2,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Wanderlights",
       location: "Downtown Columbus",
       recurring: "Recurring daily until February 16, 2025",
@@ -237,7 +246,7 @@ const Events = () => {
     {
       id: 3,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Blues & Beyond: Micah Kesselring - FREE Happening Hour",
       location: "Natalie's Grandview",
       recurring: "Recurring daily until March 5, 2025",
@@ -245,7 +254,7 @@ const Events = () => {
     {
       id: 4,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Columbus Improv Comedy Meetup!",
       location: "Nest Theatre",
       recurring: null,
@@ -253,7 +262,7 @@ const Events = () => {
     {
       id: 5,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Gallery Listening Room",
       location: "Wonderlust Studio",
       recurring: null,
@@ -261,7 +270,7 @@ const Events = () => {
     {
       id: 6,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Hot Stuff: A Sketch Comedy and Music Show",
       location: "Short North Stage",
       recurring: null,
@@ -269,7 +278,7 @@ const Events = () => {
     {
       id: 7,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "25 Reasons to Visit Columbus in 2025",
       location: "Downtown Columbus",
       recurring: "Recurring daily until February 16, 2025",
@@ -277,7 +286,7 @@ const Events = () => {
     {
       id: 8,
       image:
-        "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png",
+        "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F931396743%2F2570404762021%2F1%2Foriginal.20250109-115052?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=ef642832dd3754c332bfd7338cd48636",
       title: "Columbus Improv Comedy Meetup!",
       location: "Nest Theatre",
       recurring: null,
@@ -324,7 +333,11 @@ const Events = () => {
 
   const totalPages = Math.ceil(events.length / eventsPerPage);
 
-  const handlePageChange = (page) => {
+  interface PageChangeHandler {
+    (page: number): void;
+  }
+
+  const handlePageChange: PageChangeHandler = (page) => {
     setCurrentPage(page);
   };
 
@@ -469,12 +482,17 @@ const Events = () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden"
               >
                 <div className="relative">
-                  <img
+                  <Image
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-48 object-cover"
+                    width={940} // Set the width (in pixels)
+                    height={627} // Set the height (in pixels) maintaining aspect ratio
+                    className="object-cover"
                   />
-                  <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md">
+                  <button
+                    aria-label="Add to favorites"
+                    className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md"
+                  >
                     <Heart size={20} className="text-gray-600" />
                   </button>
                   <div className="absolute bottom-2 left-2 bg-white p-2 rounded-lg shadow-md">
@@ -503,10 +521,11 @@ const Events = () => {
 
           {/* Pagination */}
           <div className="flex justify-center mt-8">
-            {Array.from({ length: totalPages }, (_, index) => (
+            {[...Array(totalPages)].map((_, index) => (
               <button
                 key={index + 1}
                 onClick={() => handlePageChange(index + 1)}
+                aria-label={`Go to page ${index + 1}`}
                 className={`mx-1 px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-sm ${
                   currentPage === index + 1
                     ? "bg-blue-500 text-white"
@@ -677,13 +696,13 @@ const EventCard = ({ title, description, imageUrl, sponsored = false }) => (
         {title}
       </h2>
       <p className="text-sm sm:text-base text-gray-600 mb-4">{description}</p>
-      <a
+      <Link
         href="/"
         className="inline-flex items-center text-blue-500 font-semibold hover:text-blue-600 transition-colors duration-300 ease-in-out"
       >
         Learn More
         <ArrowRight className="ml-2 h-4 w-4" />
-      </a>
+      </Link>
     </div>
   </div>
 );
