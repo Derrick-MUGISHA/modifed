@@ -238,9 +238,10 @@ const RestaurantListings = () => {
                 {currentRestaurants.map((restaurant, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="relative h-48 sm:h-56">
-                      <img
+                      <Image
                         src={restaurant.image}
                         alt={restaurant.name}
+                        layout="fill"
                         className="w-full h-full object-cover"
                       />
                       {restaurant.featured && (
@@ -341,9 +342,10 @@ const RestaurantListings = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
             {featuredArticles.map((article, index) => (
               <a key={index} href={article.link} className="relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img
+                <Image
                   src={article.image}
                   alt={article.title}
+                  layout="fill"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/40"></div>

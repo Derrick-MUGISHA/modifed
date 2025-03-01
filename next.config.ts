@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
       'www.airlinepros.com',
       'cdn.businesstraveller.com',
       'img.freepik.com',
+      'via.placeholder.com',
     ],
   },
   webpack(config) {
