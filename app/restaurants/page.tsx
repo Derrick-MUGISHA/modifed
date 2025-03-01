@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Heart, MapPin, Eye, Share2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from '../../components/ui/popover';
+import Image from 'next/image';
 
 
 const RestaurantListings = () => {
@@ -95,15 +96,21 @@ const RestaurantListings = () => {
     const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantsPerPage;
     const currentRestaurants = restaurants.slice(indexOfFirstRestaurant, indexOfLastRestaurant);
   
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // interface PaginationProps {
+    //   pageNumber: number;
+    // }
+    
+    const paginate = (pageNumber: number): void => setCurrentPage(pageNumber);
   
     return (
       <div className="bg-gray-50">
         {/* Hero Section (Full Height Banner) */}
         <div className="relative h-screen overflow-hidden">
-          <img
+          <Image
             src="https://img.freepik.com/free-photo/side-view-mushroom-frying-with-stove-fire-human-hand-pan_176474-3150.jpg?t=st=1739021913~exp=1739025513~hmac=8fa4cfe2a8361f96209ea09f080bc005fc13e597841d73ce0b16f7a69d43e28d&w=1060"
             alt="Featured dish"
+            layout="fill"
+
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40"></div>
@@ -111,7 +118,7 @@ const RestaurantListings = () => {
             <div className="text-white max-w-2xl px-4">
               <h2 className="text-4xl sm:text-5xl font-bold mb-6">Discover the Best Restaurants in Kigali</h2>
               <p className="text-lg sm:text-xl">
-                Explore a wide variety of cuisines, from local delicacies to international flavors, in the heart of Rwanda's capital.
+                Explore a wide variety of cuisines, from local delicacies to international flavors, in the heart of Rwanda&apos;s capital.
               </p>
             </div>
           </div>
@@ -134,9 +141,12 @@ const RestaurantListings = () => {
             {/* Sidebar */}
             <div className="w-full lg:w-1/4">
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+                <label htmlFor="search" className="sr-only">Search restaurants</label>
                 <input
+                  id="search"
                   type="text"
-                  placeholder="Search"
+                  placeholder="Search restaurants"
+                  title="Search restaurants"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -145,13 +155,17 @@ const RestaurantListings = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">CATEGORIES</h3>
                 {categories.map((category, index) => (
                   <div key={index} className="flex items-center mb-3">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox h-5 w-5 text-blue-500 rounded focus:ring-blue-500"
-                    />
-                    <span className="ml-2 text-gray-700">
+                      <input
+                        type="checkbox"
+                        id={`category-${index}`}
+                        aria-label={`Select ${category.name}`}
+                        title={`Select ${category.name}`}
+                        placeholder={`Select ${category.name}`}
+                        className="form-checkbox h-5 w-5 text-blue-500 rounded focus:ring-blue-500"
+                      />
+                      <label htmlFor={`category-${index}`} className="ml-2 text-gray-700">
                       {category.name} ({category.count})
-                    </span>
+                    </label>
                   </div>
                 ))}
                 <button className="text-blue-500 hover:text-blue-600 mt-2">Show 19 more</button>
@@ -163,6 +177,9 @@ const RestaurantListings = () => {
                   <div key={index} className="flex items-center mb-3">
                     <input
                       type="checkbox"
+                      title={`Select ${region.name}`}
+                      placeholder={`Select ${region.name}`}
+                      aria-label={`Select ${region.name}`}
                       className="form-checkbox h-5 w-5 text-blue-500 rounded focus:ring-blue-500"
                     />
                     <span className="ml-2 text-gray-700">
@@ -202,7 +219,11 @@ const RestaurantListings = () => {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="text-gray-700">SORT:</span>
-                  <select className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <select 
+                    title="Sort restaurants"
+                    aria-label="Sort restaurants"
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
                     <option>Default</option>
                     <option>Near Me</option>
                   </select>
@@ -227,7 +248,11 @@ const RestaurantListings = () => {
                           FEATURED
                         </div>
                       )}
-                      <button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
+                      <button 
+                        title="Add to favorites"
+                        aria-label="Add to favorites"
+                        className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300"
+                      >
                         <Heart className="h-5 w-5 text-gray-700" />
                       </button>
                     </div>
@@ -280,6 +305,8 @@ const RestaurantListings = () => {
                 <button
                   onClick={() => paginate(currentPage - 1)}
                   disabled={currentPage === 1}
+                  title="Previous page"
+                  aria-label="Go to previous page"
                   className="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft className="h-5 w-5" />
@@ -300,6 +327,8 @@ const RestaurantListings = () => {
                 <button
                   onClick={() => paginate(currentPage + 1)}
                   disabled={currentPage === Math.ceil(restaurants.length / restaurantsPerPage)}
+                  title="Next page"
+                  aria-label="Go to next page"
                   className="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ChevronRight className="h-5 w-5" />

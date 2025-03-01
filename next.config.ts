@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
       'www.rwandaclothing.com',
       'www.airlinepros.com',
       'cdn.businesstraveller.com',
+      'img.freepik.com',
     ],
   },
   webpack(config) {
