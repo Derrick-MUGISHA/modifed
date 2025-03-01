@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
       'cdn.businesstraveller.com',
       'img.freepik.com',
       'via.placeholder.com',
+      'd1bvpoagx8hqbg.cloudfront.net',
     ],
   },
   webpack(config) {
