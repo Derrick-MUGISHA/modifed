@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
-import styles from './page.module.css';
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Calendar, MapPin, Info, X } from "lucide-react";
 
@@ -127,25 +126,26 @@ const CulturalFestivals = () => {
           {festivals.map((festival, index) => (
             <Card
               key={index}
-              className={`${styles.card} ${
-                animateCards ? styles.cardVisible : styles.cardOpacity
+              className={`overflow-hidden transition-all duration-500 ${
+                animateCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
               style={{ 
-                transitionDelay: `${index * 100}ms`
+                transitionDelay: `${index * 100}ms`,
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
               }}
             >
-              <div className={styles.imageContainer}>
-                <div 
-                  className={styles.image}
-                  style={{
-                    backgroundImage: `url(${festival.image})`
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                    <h3 className="text-2xl font-bold p-4 text-white">
-                      {festival.title}
-                    </h3>
-                  </div>
+              <div 
+                className="relative h-52 overflow-hidden" 
+                style={{
+                  backgroundImage: `url(${festival.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                  <h3 className="text-2xl font-bold p-4 text-white">
+                    {festival.title}
+                  </h3>
                 </div>
               </div>
               
@@ -195,12 +195,16 @@ const CulturalFestivals = () => {
         <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="absolute inset-0 bg-black/70" onClick={closeModal}></div>
           <div className={`relative bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-auto transform ${isVisible ? 'scale-100' : 'scale-95'} transition-transform duration-300`}>
-            <div className={styles.modalImage}>
+            <div className="relative h-64">
               <div 
-                className={styles.modalImageBackground}
-                style={{ backgroundImage: `url(${selectedFestival.image})` }}
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `url(${selectedFestival.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
               ></div>
-              <div className={styles.modalGradient}>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <h2 className="text-3xl font-bold text-white">{selectedFestival.title}</h2>
                 <div className="flex gap-4 mt-2">
                   <div className="flex items-center gap-1 text-white/90">
