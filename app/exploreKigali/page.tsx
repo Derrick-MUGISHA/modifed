@@ -24,7 +24,7 @@ const ExploreKigaliCarousel = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
-        let interval;
+        let interval: NodeJS.Timeout;
         if (!isHovered) {
             interval = setInterval(() => {
                 setActiveIndex(prev => (prev + 1) % imageSlides.length);
@@ -33,8 +33,8 @@ const ExploreKigaliCarousel = () => {
         return () => clearInterval(interval);
     }, [isHovered, imageSlides.length]);
 
-    const goToSlide = (index) => {
-        setActiveIndex(index);
+    const goToSlide = (index: number): void => {
+      setActiveIndex(index);
     };
 
     return (
