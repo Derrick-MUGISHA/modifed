@@ -133,7 +133,23 @@ const attractions = [
 export default function KigaliTourism() {
   const [activeTab, setActiveTab] = useState("all");
   const [favorites, setFavorites] = useState([]);
-  const [selectedAttraction, setSelectedAttraction] = useState(null);
+  interface Attraction {
+    id: number;
+    title: string;
+    description: string;
+    longDescription: string;
+    category: string;
+    image: string;
+    visitDuration: string;
+    location: string;
+    openingHours: string;
+    entranceFee: string;
+    tips: string;
+    rating: number;
+    popular: boolean;
+  }
+  
+  const [selectedAttraction, setSelectedAttraction] = useState<Attraction | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -316,7 +332,7 @@ export default function KigaliTourism() {
                   <ul className="text-gray-700 space-y-2">
                     <li className="flex items-start">
                       <Compass className="w-4 h-4 mr-2 mt-1 text-emerald-600" />
-                      <span>Kigali is known as one of Africa's cleanest and safest cities</span>
+                      <span>Kigali is known as one of Africa&apos;s cleanest and safest cities</span>
                     </li>
                     <li className="flex items-start">
                       <Compass className="w-4 h-4 mr-2 mt-1 text-emerald-600" />
