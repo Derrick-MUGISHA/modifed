@@ -81,9 +81,11 @@ const ImageCarousel = () => {
 
   export default function Home() {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gradient-to-r from-[#00A9E0] via-[#FCD116] to-[#007847]">
-      <h1 className="text-4xl font-bold mb-4 text-white">KIGALI VIEW</h1> {/* Text color set to white */}
-        <ImageCarousel />
-      </div>
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <h1 className="text-4xl font-bold mb-4 text-transparent bg-gradient-to-r from-[#00A9E0] via-[#FCD116] to-[#007847] bg-clip-text">
+        KIGALI VIEW
+      </h1> {/* Gradient applied only to text */}
+      <ImageCarousel />
+    </div>
     );
   }
