@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs,  TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -145,12 +145,16 @@ export default function KigaliTourism() {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
-  const handleFavoriteToggle = (id) => {
-    if (favorites.includes(id)) {
-      setFavorites(favorites.filter(favId => favId !== id));
-    } else {
-      setFavorites([...favorites, id]);
-    }
+  interface FavoriteId {
+    id: number;
+  }
+
+  const handleFavoriteToggle = (id: number): void => {
+      if (favorites.includes(id)) {
+        setFavorites(favorites.filter((favId: number) => favId !== id));
+      } else {
+        setFavorites([...favorites, id]);
+      }
   };
 
   const openModal = (attraction) => {
@@ -494,7 +498,7 @@ export default function KigaliTourism() {
 
     <div className="text-center mt-12">
       <Button className="bg-green-600 hover:bg-green-700 text-white">
-        Explore Rwanda's Wonders
+        Explore Rwanda&apos;s Wonders
       </Button>
     </div>
 
