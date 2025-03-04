@@ -5,7 +5,7 @@ import { Card, CardTitle, CardDescription, CardContent, CardFooter } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs,  TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Motion, MapPin, Calendar, Clock, ExternalLink, Star, Heart, Info, Compass } from "lucide-react";
+import { MapPin, Calendar, Clock, ExternalLink, Star, Heart, Info, Compass } from "lucide-react";
 
 const attractions = [
   {
@@ -132,7 +132,7 @@ const attractions = [
 
 export default function KigaliTourism() {
   const [activeTab, setActiveTab] = useState("all");
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<number[]>([]);
   interface Attraction {
     id: number;
     title: string;
@@ -161,9 +161,9 @@ export default function KigaliTourism() {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
-  interface FavoriteId {
-    id: number;
-  }
+  // interface FavoriteId {
+  //   id: number;
+  // }
 
   const handleFavoriteToggle = (id: number): void => {
       if (favorites.includes(id)) {
@@ -173,7 +173,7 @@ export default function KigaliTourism() {
       }
   };
 
-  const openModal = (attraction) => {
+  const openModal = (attraction: Attraction) => {
     setSelectedAttraction(attraction);
     setIsModalOpen(true);
     // Prevent body scrolling when modal is open
@@ -209,7 +209,7 @@ export default function KigaliTourism() {
             Explore Kigali, Rwanda
           </h1>
           <p className={`text-xl text-white max-w-2xl transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-            Discover the vibrant culture, rich history, and natural wonders of Rwanda's thriving capital city and its surrounding attractions
+            Discover the vibrant culture, rich history, and natural wonders of Rwanda&apos;s thriving capital city and its surrounding attractions
           </p>
           <div className={`mt-8 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
             <Button className="bg-white hover:bg-gray-100 text-emerald-800 font-semibold px-6 py-3">
