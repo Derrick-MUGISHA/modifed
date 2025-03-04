@@ -116,7 +116,7 @@ const HeroSection = () => {
   
   const VisitorResources = () => {
     const [showMore, setShowMore] = useState(false);
-    const [currentImage, setCurrentImage] = useState("");
+    // const [currentImage, setCurrentImage] = useState("");
   
     const resources = [
       { id: 1, title: "Maps", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
@@ -130,12 +130,12 @@ const HeroSection = () => {
       { id: 9, title: "Tours", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
       { id: 10, title: "Culture", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
     ];
-    const listings = [
-        { id: 1, name: "Visit Dublin Ohio", location: "9 S. High St.", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
-        { id: 2, name: "Experience Columbus Visitor Center - Arena District", location: "277 W. Nationwide Blvd", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
-        { id: 3, name: "Columbus Metropolitan Library", location: "96 S. Grant Ave.", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
-        // ... rest of your listings data
-      ];
+    // const listings = [
+    //     { id: 1, name: "Visit Dublin Ohio", location: "9 S. High St.", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
+    //     { id: 2, name: "Experience Columbus Visitor Center - Arena District", location: "277 W. Nationwide Blvd", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
+    //     { id: 3, name: "Columbus Metropolitan Library", location: "96 S. Grant Ave.", image: "https://i.postimg.cc/vmH8rtss/kigali-view-high-resolution-logo.png" },
+    //     // ... rest of your listings data
+    //   ];
     const displayedResources = showMore ? resources : resources.slice(0, 4);
   
     return (
@@ -245,12 +245,16 @@ const HeroSection = () => {
   
   const ListingsGrid = () => {
     const [view, setView] = useState("grid");
-    const [favorites, setFavorites] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [favorites, setFavorites] = useState<number[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   
-    const toggleFavorite = (id) => {
-      setFavorites((prev) =>
-        prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]
+    // interface Favorite {
+    //   id: number;
+    // }
+
+    const toggleFavorite = (id: number): void => {
+      setFavorites((prev: number[]) =>
+        prev.includes(id) ? prev.filter((fav: number) => fav !== id) : [...prev, id]
       );
     };
   

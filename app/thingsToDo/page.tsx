@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const HeroSection = () => (
@@ -31,7 +32,7 @@ const AwardsBadges = () => (
       </div>
       {/* Awards Text */}
       <p className="text-gray-600 text-center sm:text-left max-w-lg">
-        Condé Nast Traveler's 2024 Readers' Choice Awards Names Kigali a Top 10
+        Condé Nast Traveler&apos;s 2024 Readers&apos; Choice Awards Names Kigali a Top 10
         Best Big City in Africa
         <br />- and -<br />
         AFAR Names Kigali a Where to Go in 2025 Destination
@@ -48,12 +49,12 @@ const QuickNav = () => (
         {["Top Attractions & Events", "Adventure", "Sports", "Shopping"].map(
           (item, i) => (
             <React.Fragment key={item}>
-              <a
+              <Link
                 href="/"
                 className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
               >
                 {item}
-              </a>
+              </Link>
               {i < 3 && " | "}
             </React.Fragment>
           )
@@ -66,27 +67,27 @@ const QuickNav = () => (
 const IntroText = () => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <p className="text-gray-600 text-center sm:text-left">
-      Say "yes" to new things and new places in Kigali. With local fun like new{" "}
-      <a
+      Say &ldquo;yes&rdquo; to new things and new places in Kigali. With local fun like new{" "}
+      <Link
         href="/"
         className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
       >
         rooftop bars
-      </a>{" "}
+      </Link>{" "}
       and restaurants, miles of trails, pro sports in every season,{" "}
-      <a
+      <Link
         href="/"
         className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
       >
         top-rated family attractions
-      </a>
-      , experiential activities and more, you'll never be short of fun things to
-      do in Kigali, whether you're planning a date night or a family outing.
+      </Link>
+      , experiential activities and more, you&apos;ll never be short of fun things to
+      do in Kigali, whether you&apos;re planning a date night or a family outing.
     </p>
   </div>
 );
 
-const ActivityCard = ({ image, title }) => (
+const ActivityCard = ({ image, title }: { image: string; title: string }) => (
   <div className="relative h-64 sm:h-72 md:h-80 overflow-hidden rounded-lg shadow-lg group">
     {/* Activity Image */}
     <img
@@ -141,28 +142,28 @@ const TopAttractions = () => (
         Top Attractions & Events
       </h2>
       <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
-        Use Kigali View'{" "}
-        <a
+        Use Kigali View&apos;s{" "}
+        <Link
           href="/"
           className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
         >
           experience trails
-        </a>{" "}
-        to explore the city's coffee, distilleries, pizza and outdoor
+        </Link>{" "}
+        to explore the city&apos;s coffee, distilleries, pizza and outdoor
         adventures, or head to family favorite attractions like the{" "}
-        <a
+        <Link
           href="/"
           className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
         >
           Kigali Zoo & Aquarium
-        </a>{" "}
+        </Link>{" "}
         or{" "}
-        <a
+        <Link
           href="/"
           className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
         >
           Franklin Park Conservatory and Botanical Gardens
-        </a>
+        </Link>
         .
       </p>
       <AttractionsGrid />
