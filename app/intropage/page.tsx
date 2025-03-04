@@ -81,8 +81,9 @@ const ImageCarousel = () => {
 
   export default function Home() {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="flex flex-col items-center justify-center min-h-screen py-2bg-gradient-to-r from-[#00A9E0] via-[#FCD116] to-[#007847] bg-clip-text">
         <h1 className="text-4xl font-bold mb-4">KIGALI VIEW</h1>
+        
         <ImageCarousel />
       </div>
     );
